@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
     templateUrl: './dm-screen.component.html',
     styleUrls: ['./dm-screen.component.scss'],
 })
-export class DMScreenComponent {}
+export class DMScreenComponent {
+    paymentLink = 'https://buy.stripe.com/aEU6oocL16GtfC0eUV';
+}
