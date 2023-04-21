@@ -1,0 +1,82 @@
+<ion-grid class="ion-margin-horizontal">
+    <ion-row *ngFor="let bgm of bgmSet.items; index as bgmIndex">
+        <ion-col size="5">
+            <ion-item>
+                <ion-label
+                    position="stacked"
+                    for="name"
+                    [color]="colours[bgmIndex]"
+                    >Name</ion-label
+                >
+                <ion-input
+                    [color]="colours[bgmIndex]"
+                    class="ion-text-center"
+                    placeholder="Why is you so mean to me"
+                    [(ngModel)]="bgm.name"
+                    (change)="change()"
+                    name="name"
+                    id="name"
+                    [debounce]="debounceTime"
+                ></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col size="6">
+            <ion-item>
+                <ion-label
+                    position="stacked"
+                    for="link"
+                    [color]="colours[bgmIndex]"
+                    >Link</ion-label
+                >
+                <ion-input
+                    [color]="colours[bgmIndex]"
+                    class="ion-text-center"
+                    placeholder="https://youtube.com/clip/UgkxAEwXxj27ejYI1QkTz9fgrrCYGO1XEkW_"
+                    [(ngModel)]="bgm.link"
+                    (change)="change()"
+                    name="link"
+                    id="link"
+                    type="url"
+                    [debounce]="debounceTime"
+                ></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-button
+                fill="clear"
+                color="danger"
+                class="ion-margin"
+                (click)="removeBgm(bgmIndex)"
+                title="Delete BGM"
+            >
+                <ion-icon
+                    slot="icon-only"
+                    name="close-circle-outline"
+                ></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="bgmSet.items.length < bgmPerSet">
+        <ion-col>
+            <ion-item button detail="false" lines="none" (click)="addBgm()">
+                <ion-icon name="add" slot="start"></ion-icon>
+                <ion-label>Add BGM</ion-label>
+            </ion-item>
+        </ion-col>
+        <ion-col size="4">
+            <ion-item
+                button
+                detail="false"
+                lines="none"
+                (click)="deleteBgmSet()"
+            >
+                <ion-icon
+                    name="trash-outline"
+                    slot="start"
+                    color="danger"
+                ></ion-icon>
+                <ion-label color="danger">Delete BGM Set</ion-label>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+</ion-grid>

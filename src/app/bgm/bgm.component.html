@@ -1,0 +1,90 @@
+<ion-content>
+    <app-bgm-player
+        [bgm]="bgm"
+        [player]="player"
+        [loading]="loading"
+        [isPlaying]="isPlaying"
+        (playbackEvent)="playbackEvent($event)"
+        (volumeEvent)="volumeEvent($event)"
+    ></app-bgm-player>
+    <ion-list lines="full">
+        <ion-accordion-group
+            #accordionGroup
+            [multiple]="true"
+            [disabled]="loading"
+        >
+            <ion-accordion
+                [value]="bgmSet.name"
+                *ngFor="let bgmSet of bgmSets; index as bgmSetIndex"
+                toggleIconSlot="start"
+                toggleIcon="caret-down-circle"
+            >
+                <ion-item slot="header">
+                    <ion-item lines="none" class="ion-margin-vertical">
+                        <ion-input
+                            class="ion-no-padding"
+                            [placeholder]="
+                                'BGM Set ' + (bgmSetIndex + 1) + ' Name'
+                            "
+                            [(ngModel)]="bgmSet.name"
+                            (click)="$event.stopPropagation()"
+                            (change)="save()"
+                            name="name"
+                            id="name"
+                        ></ion-input>
+                    </ion-item>
+                    <app-bgm-buttons
+                        slot="end"
+                        [bgmSet]="bgmSet"
+                        [disabled]="loading"
+                        (togglePlaybackEvent)="togglePlayback($event)"
+                    ></app-bgm-buttons>
+                </ion-item>
+                <app-bgm-editor
+                    slot="content"
+                    [bgmSet]="bgmSet"
+                    [bgmSetIndex]="bgmSetIndex"
+                    (deleteBgmSetEvent)="deleteBgmSet($event)"
+                    (changeEvent)="save()"
+                ></app-bgm-editor>
+            </ion-accordion>
+        </ion-accordion-group>
+        <ion-row>
+            <ion-col>
+                <ion-item
+                    class="ion-padding-vertical"
+                    button
+                    detail="false"
+                    lines="none"
+                    (click)="addBgmSet()"
+                    [disabled]="loading"
+                >
+                    <ion-icon name="add" slot="start"></ion-icon>
+                    <ion-label>Add BGM Set</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size="3">
+                <app-bgm-set-importer
+                    (importEvent)="import($event)"
+                ></app-bgm-set-importer>
+            </ion-col>
+            <ion-col size="3">
+                <app-bgm-set-exporter
+                    [storageKey]="storageKey"
+                ></app-bgm-set-exporter>
+            </ion-col>
+        </ion-row>
+        <youtube-player
+            class="ion-hide"
+            [videoId]="bgm.link"
+            [disableCookies]="true"
+            (stateChange)="debouncePlayerState($event.data)"
+            (ready)="playerReady($event)"
+            [playerVars]="{
+                loop: 1,
+                autoplay: 1,
+                playlist: getVideoId(bgm.link)
+            }"
+        ></youtube-player>
+    </ion-list>
+</ion-content>

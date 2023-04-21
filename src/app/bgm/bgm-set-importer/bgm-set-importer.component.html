@@ -1,0 +1,22 @@
+<ion-item
+    color="light"
+    class="ion-padding-vertical ion-text-center"
+    button
+    detail="false"
+    lines="none"
+    (click)="click()"
+>
+    <ion-icon
+        name="push-outline"
+        slot="start"
+        class="ion-no-margin ion-margin-start"
+    ></ion-icon>
+    <ion-label>Import BGM Sets JSON</ion-label>
+    <input
+        #fileInput
+        type="file"
+        (change)="import()"
+        accept="application/json"
+        class="ion-hide"
+    />
+</ion-item>

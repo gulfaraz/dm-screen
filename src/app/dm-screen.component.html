@@ -1,0 +1,26 @@
+<ion-tabs>
+    <ion-tab-bar
+        class="ion-justify-content-start"
+        slot="top"
+        translucent="true"
+    >
+        <ion-tab-button
+            class="dm-screen"
+            href="https://github.com/gulfaraz/dm-screen"
+        >
+            <ion-label class="ion-text-start">
+                <h1 class="text-weight-700">DM Screen</h1>
+                <ion-text class="text-weight-400">by Gulfaraz Rahman</ion-text>
+            </ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="bgm">
+            <ion-label>BGM</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="alignment-tracker">
+            <ion-label>Alignment Tracker</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="rules" [disabled]="true">
+            <ion-label>Rules</ion-label>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>

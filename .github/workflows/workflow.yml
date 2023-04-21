@@ -1,0 +1,60 @@
+name: "Continuous Integration and Deployment for DM Screen"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-build-deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci --no-audit --ignore-scripts
+
+      - run: npm test
+
+      - run: npm run build
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+
+  bump-version:
+    needs: [test-build-deploy]
+    if: github.event_name == 'push'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Wait for previous workflow to complete
+        uses: softprops/turnstyle@v1
+        with:
+          abort-after-seconds: 1800
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v3
+
+      - name: Bump version and push tag
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          git-message: "chore(release): {version}"
+          release-count: 10
+
+permissions:
+  contents: write

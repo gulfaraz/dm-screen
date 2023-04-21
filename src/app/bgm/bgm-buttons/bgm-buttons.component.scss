@@ -1,0 +1,12 @@
+:host {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    max-width: calc(100% - 250px);
+}
+
+.loading-spinner {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+}

@@ -1,0 +1,70 @@
+<ion-card>
+    <ion-card-header class="ion-margin-horizontal">
+        <ion-card-title
+            >{{ characters.length }} Character{{
+                characters.length === 1 ? "" : "s"
+            }}</ion-card-title
+        >
+    </ion-card-header>
+    <ion-card-content>
+        <ion-list>
+            <ion-item-sliding *ngFor="let character of characters">
+                <ion-item>
+                    <ion-input
+                        [style.color]="character.colour"
+                        placeholder="Character Name"
+                        [debounce]="debounceTime"
+                        [(ngModel)]="character.name"
+                        (ionChange)="onChange(character, $any($event))"
+                    ></ion-input>
+                    <ion-button
+                        slot="end"
+                        size="small"
+                        fill="clear"
+                        [style.color]="character.colour"
+                        (mouseover)="fillCharacter(character)"
+                        (mouseout)="fillCharacter(null)"
+                    >
+                        {{ character.alignment() }}
+                    </ion-button>
+                </ion-item>
+                <ion-item-options
+                    side="end"
+                    (ionSwipe)="deleteCharacter(character)"
+                >
+                    <ion-item-option
+                        color="danger"
+                        expandable
+                        (click)="deleteCharacter(character)"
+                        >Delete</ion-item-option
+                    >
+                </ion-item-options>
+            </ion-item-sliding>
+            <form #addCharacterForm="ngForm" (ngSubmit)="addCharacter()">
+                <ion-item>
+                    <ion-input
+                        placeholder="Character Name"
+                        [debounce]="debounceTime"
+                        [(ngModel)]="characterName"
+                        name="name"
+                        id="name"
+                        required="true"
+                        minlength="2"
+                        [appUniqueCharacterName]="characters"
+                    ></ion-input>
+                    <ion-button
+                        [color]="
+                            addCharacterForm.form.valid ? 'success' : 'medium'
+                        "
+                        slot="end"
+                        size="small"
+                        fill="outline"
+                        type="submit"
+                        [disabled]="!addCharacterForm.form.valid"
+                        >Add Character</ion-button
+                    >
+                </ion-item>
+            </form>
+        </ion-list>
+    </ion-card-content>
+</ion-card>

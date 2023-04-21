@@ -1,0 +1,23 @@
+<ion-button
+    [fill]="bgm.play ? 'outline' : 'solid'"
+    [color]="colours[bgmIndex]"
+    slot="end"
+    size="default"
+    [disabled]="disabled || !isValidUrl(bgm.link)"
+    (click)="togglePlayback($event, bgm)"
+    *ngFor="let bgm of bgmSet.items; index as bgmIndex"
+    class="ion-margin"
+>
+    <ion-icon
+        *ngIf="!bgm.loading"
+        slot="start"
+        [name]="bgm.play ? 'pause-outline' : 'play-outline'"
+    ></ion-icon>
+    <ion-spinner
+        *ngIf="bgm.loading"
+        slot="start"
+        name="crescent"
+        class="loading-spinner"
+    ></ion-spinner>
+    <ion-label>{{ bgm.name }}</ion-label>
+</ion-button>

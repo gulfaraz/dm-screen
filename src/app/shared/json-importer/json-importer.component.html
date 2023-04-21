@@ -1,0 +1,17 @@
+<ion-button
+    [expand]="expand"
+    [fill]="fill"
+    [size]="size"
+    [class]="classes"
+    (click)="click()"
+>
+    <ion-icon slot="start" name="push-outline"></ion-icon>
+    <ion-label>{{ label }}</ion-label>
+    <input
+        #fileInput
+        type="file"
+        (change)="import()"
+        accept="application/json"
+        class="ion-hide"
+    />
+</ion-button>
