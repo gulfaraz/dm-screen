@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/gulfaraz/dm-screen/compare/v0.3.0...v0.4.0) (2023-04-22)
+
+
+### Features
+
+* add firebase ([8806271](https://github.com/gulfaraz/dm-screen/commit/8806271d645d8594e6cb2035a688d51e636f5965))
+
+
+
 # [0.3.0](https://github.com/gulfaraz/dm-screen/compare/v0.2.0...v0.3.0) (2023-04-21)
 
 
