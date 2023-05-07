@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/gulfaraz/dm-screen/compare/v0.4.0...v0.5.0) (2023-05-07)
+
+
+### Features
+
+* remove firebase ([b6aab48](https://github.com/gulfaraz/dm-screen/commit/b6aab48d8036d75b779d049a6aa9ae81faad5a94))
+
+
+
 # [0.4.0](https://github.com/gulfaraz/dm-screen/compare/v0.3.0...v0.4.0) (2023-04-22)
 
 
