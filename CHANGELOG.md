@@ -1,3 +1,12 @@
+## [0.5.1](https://github.com/gulfaraz/dm-screen/compare/v0.5.0...v0.5.1) (2023-05-21)
+
+
+### Bug Fixes
+
+* add legal module ([48f1ae1](https://github.com/gulfaraz/dm-screen/commit/48f1ae146ca0459a22dd7a2744fdf273d227a8ce))
+
+
+
 # [0.5.0](https://github.com/gulfaraz/dm-screen/compare/v0.4.0...v0.5.0) (2023-05-07)
 
 
