@@ -14,7 +14,7 @@ If You are not of legal contract age (younger than 18 years old in most countrie
 
 I process personal information if I have a valid legal basis. This includes, but is not limited to, the following,
 
-1. for the provision of My Application, the services I provide, and to oblige My [Terms of Service](/#/terms)
+1. for the provision of My Application, the services I provide, and to oblige My [Terms of Service](/dm-screen/#/terms)
 2. to comply with My legal obligations
 3. for the protection of My legitimate interests and affiliates
 4. to process Your requests with Your consent
@@ -35,7 +35,7 @@ I collect the following,
 I use the collected information in accordance with My legal bases. This includes, but is not limited to, the following,
 
 1. to comply with My legal obligations
-2. to oblige My [Terms of Service](/#/terms)
+2. to oblige My [Terms of Service](/dm-screen/#/terms)
 3. to provide information through My Application and services
 4. to modify or change My Application and services
 5. to contact interested visitors and affiliates
