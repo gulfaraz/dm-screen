@@ -13,7 +13,7 @@ For the purposes of these Terms:
 -   “Device” means any device that can access the Application such as a personal computer, a smartphone or a digital tablet.
 -   “Feedback” means feedback, comments, ideas, or suggestions sent by You.
 -   “Terms of Service” (also referred to as “Terms“ in this document) mean these Terms that form the entire agreement between You and Me regarding the use of the Application.
--   “Application” refers to the web application, accessible from https://gulfaraz.github.io/
+-   “Application” refers to the web application, accessible from https://gulfaraz.github.io/dm-screen/
 -   “You” (referred to as either "You", or "Your" in these Terms) refers to the individual accessing or using the Application, or the company, or other legal entity on behalf of which such individual is accessing or using the Application, as applicable.
 
 ### Intellectual Property

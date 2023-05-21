@@ -4,7 +4,7 @@ Last updated on 22 May 2023.
 
 ### Introduction
 
-Gulfaraz Rahman (referred to as either "Individual", "I", "Me", or "My" in this document) provides information at https://gulfaraz.github.io/ (referred to as "Application") that can be accessed by visitors (referred to as either "You, or "Your in this document) who may be individuals, or a company, or other legal entity on behalf of which such individual is accessing or using My Application.
+Gulfaraz Rahman (referred to as either "Individual", "I", "Me", or "My" in this document) provides information at https://gulfaraz.github.io/dm-screen/ (referred to as "Application") that can be accessed by visitors (referred to as either "You, or "Your in this document) who may be individuals, or a company, or other legal entity on behalf of which such individual is accessing or using My Application.
 
 In order to provide access to My Application, I need to process information which may include Your personal information. In this document, I explain why and how I manage Your information, Your rights over Your information, and provide a communication channel to exercise Your rights.
 
