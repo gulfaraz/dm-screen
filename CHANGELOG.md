@@ -1,3 +1,12 @@
+## [0.5.2](https://github.com/gulfaraz/dm-screen/compare/v0.5.1...v0.5.2) (2023-05-21)
+
+
+### Bug Fixes
+
+* add full path to links ([d5370c7](https://github.com/gulfaraz/dm-screen/commit/d5370c7d524a3c5ced6be4117f99e22d8ec02c53))
+
+
+
 ## [0.5.1](https://github.com/gulfaraz/dm-screen/compare/v0.5.0...v0.5.1) (2023-05-21)
 
 
