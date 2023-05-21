@@ -37,6 +37,20 @@ import { DMScreenComponent } from './dm-screen.component';
                                     (m) => m.RulesModule,
                                 ),
                         },
+                        {
+                            path: 'privacy',
+                            loadChildren: () =>
+                                import('./legal/legal.module').then(
+                                    (m) => m.LegalModule,
+                                ),
+                        },
+                        {
+                            path: 'terms',
+                            loadChildren: () =>
+                                import('./legal/legal.module').then(
+                                    (m) => m.LegalModule,
+                                ),
+                        },
                     ],
                 },
             ],

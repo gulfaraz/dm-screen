@@ -26,6 +26,7 @@
     "@ionic/angular": "^6.6.0",
     "d3": "^7.8.4",
     "lodash.debounce": "^4.0.8",
+    "ngx-markdown": "^15.1.2",
     "prettier": "^2.8.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
