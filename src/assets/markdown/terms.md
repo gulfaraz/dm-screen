@@ -36,7 +36,7 @@ Payments made through the Stripe "Pay What You Want" feature are processed by St
 
 ### Privacy
 
-Please refer to My [Privacy Policy](/#/privacy) for information on how I collect, use, and disclose Your personally identifiable information.
+Please refer to My [Privacy Policy](/dm-screen/#/privacy) for information on how I collect, use, and disclose Your personally identifiable information.
 
 ### Disclaimer
 
