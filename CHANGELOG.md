@@ -1,3 +1,12 @@
+## [0.5.3](https://github.com/gulfaraz/dm-screen/compare/v0.5.2...v0.5.3) (2023-05-21)
+
+
+### Bug Fixes
+
+* specify app link in legal ([739e9c2](https://github.com/gulfaraz/dm-screen/commit/739e9c21d552275deefbcd54067449c1638de3f1))
+
+
+
 ## [0.5.2](https://github.com/gulfaraz/dm-screen/compare/v0.5.1...v0.5.2) (2023-05-21)
 
 
