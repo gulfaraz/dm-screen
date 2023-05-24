@@ -1,3 +1,12 @@
+## [0.5.4](https://github.com/gulfaraz/dm-screen/compare/v0.5.3...v0.5.4) (2023-05-24)
+
+
+### Bug Fixes
+
+* rename bgm to soundboard, fix tooltip in alignment tracker, and add manuals to soundboard and alignment tracker ([7ae4181](https://github.com/gulfaraz/dm-screen/commit/7ae41812469fa187e1850f0daaf8fa41332154b4))
+
+
+
 ## [0.5.3](https://github.com/gulfaraz/dm-screen/compare/v0.5.2...v0.5.3) (2023-05-21)
 
 
