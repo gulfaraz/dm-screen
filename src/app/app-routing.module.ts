@@ -14,10 +14,10 @@ import { DMScreenComponent } from './dm-screen.component';
                         {
                             path: '',
                             pathMatch: 'full',
-                            redirectTo: 'bgm',
+                            redirectTo: 'sound-board',
                         },
                         {
-                            path: 'bgm',
+                            path: 'sound-board',
                             loadChildren: () =>
                                 import('./bgm/bgm.module').then(
                                     (m) => m.BgmModule,

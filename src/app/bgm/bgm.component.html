@@ -1,4 +1,87 @@
 <ion-content>
+    <ion-row>
+        <ion-col class="ion-text-center ion-no-padding">
+            <ion-button
+                id="how-to-use-sound-board-modal"
+                fill="solid"
+                expand="full"
+                color="medium"
+                size="small"
+                class="ion-no-margin"
+                >How to use Sound Board?</ion-button
+            >
+            <ion-modal
+                #howToUseSoundBoardModal
+                trigger="how-to-use-sound-board-modal"
+            >
+                <ng-template>
+                    <ion-header>
+                        <ion-toolbar>
+                            <ion-title>How to use Sound Board?</ion-title>
+                            <ion-buttons slot="end">
+                                <ion-button
+                                    (click)="howToUseSoundBoardModal.dismiss()"
+                                    >Close</ion-button
+                                >
+                            </ion-buttons>
+                        </ion-toolbar>
+                    </ion-header>
+                    <ion-content>
+                        <ion-list lines="none">
+                            <ion-item>
+                                <ion-label class="ion-text-wrap" color="danger">
+                                    <h3>
+                                        This application uses
+                                        <a
+                                            href="https://support.google.com/youtube/answer/171780"
+                                            >YouTube Embed</a
+                                        >
+                                        as the content source. By using this
+                                        application, you consent to YouTube's
+                                        terms of service and privacy policy. You
+                                        are fully responsible to ensure that you
+                                        are not infringing any copyright.
+                                    </h3>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="ion-text-wrap">
+                                    <br />
+                                    <h2>Create Sound Board</h2>
+                                    <br />
+                                    <p>
+                                        Click "Add Sound Group", then click "Add
+                                        Sound" to enter the YouTube video link
+                                        with the desired sound. You can assign a
+                                        name to each sound for reference.
+                                    </p>
+                                    <br />
+                                    <p>
+                                        You can group the sounds indicated by a
+                                        row. Each sound is indicated by a
+                                        coloured button.
+                                    </p>
+                                </ion-label>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label class="ion-text-wrap">
+                                    <br />
+                                    <h2>Play</h2>
+                                    <br />
+                                    <p>
+                                        Play the sound by clicking on the
+                                        assigned button. You can control the
+                                        playback and volume in the player
+                                        controls on top of the sound board.
+                                    </p>
+                                </ion-label>
+                            </ion-item>
+                        </ion-list>
+                    </ion-content>
+                </ng-template>
+            </ion-modal>
+        </ion-col>
+    </ion-row>
     <app-bgm-player
         [bgm]="bgm"
         [player]="player"
@@ -24,7 +107,7 @@
                         <ion-input
                             class="ion-no-padding"
                             [placeholder]="
-                                'BGM Set ' + (bgmSetIndex + 1) + ' Name'
+                                'Sound Group ' + (bgmSetIndex + 1) + ' Name'
                             "
                             [(ngModel)]="bgmSet.name"
                             (click)="$event.stopPropagation()"
@@ -60,7 +143,7 @@
                     [disabled]="loading"
                 >
                     <ion-icon name="add" slot="start"></ion-icon>
-                    <ion-label>Add BGM Set</ion-label>
+                    <ion-label>Add Sound Group</ion-label>
                 </ion-item>
             </ion-col>
             <ion-col size="3">

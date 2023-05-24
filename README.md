@@ -1,6 +1,6 @@
 # DM Screen
 
-1. Background Music (BGM)
+1. Sound Board
 2. Alignment Tracker
 3. Rules
 
