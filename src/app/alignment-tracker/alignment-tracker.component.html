@@ -1,5 +1,78 @@
 <ion-content>
-    <ion-grid class="ion-margin">
+    <ion-grid [style.padding]="0">
+        <ion-row>
+            <ion-col class="ion-text-center ion-no-padding">
+                <ion-button
+                    id="how-to-use-alignment-tracker-modal"
+                    fill="solid"
+                    expand="full"
+                    color="medium"
+                    size="small"
+                    class="ion-no-margin"
+                    >How to use Alignment Tracker?</ion-button
+                >
+                <ion-modal
+                    #howToUseAlignmentTrackerModal
+                    trigger="how-to-use-alignment-tracker-modal"
+                >
+                    <ng-template>
+                        <ion-header>
+                            <ion-toolbar>
+                                <ion-title
+                                    >How to use Alignment Tracker?</ion-title
+                                >
+                                <ion-buttons slot="end">
+                                    <ion-button
+                                        (click)="
+                                            howToUseAlignmentTrackerModal.dismiss()
+                                        "
+                                        >Close</ion-button
+                                    >
+                                </ion-buttons>
+                            </ion-toolbar>
+                        </ion-header>
+                        <ion-content>
+                            <ion-list lines="none">
+                                <ion-item>
+                                    <ion-label class="ion-text-wrap">
+                                        <br />
+                                        <br />
+                                        <h2>Input Character Name</h2>
+                                        <br />
+                                        <p>
+                                            Enter the character name then click
+                                            "Add Character". This will add a
+                                            coloured marker to the graph to
+                                            track the characters alignment.
+                                        </p>
+                                    </ion-label>
+                                </ion-item>
+                                <ion-item>
+                                    <ion-label class="ion-text-wrap">
+                                        <br />
+                                        <br />
+                                        <h2>Adjust Alignment</h2>
+                                        <br />
+                                        <p>
+                                            Adjust the character alignment by
+                                            dragging their character marker on
+                                            the graph.
+                                        </p>
+                                        <br />
+                                        <p>
+                                            The axes are labelled with ethics
+                                            (chaotic/lawful) along the x-axis
+                                            and moral (good/evil) along the
+                                            y-axis.
+                                        </p>
+                                    </ion-label>
+                                </ion-item>
+                            </ion-list>
+                        </ion-content>
+                    </ng-template>
+                </ion-modal>
+            </ion-col>
+        </ion-row>
         <ion-row>
             <ion-col>
                 <app-alignment-tracker-controls

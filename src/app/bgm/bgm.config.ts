@@ -11,7 +11,7 @@ export const colours = [
     'danger',
 ];
 
-export const exportLabel = 'Export Bgm Sets JSON';
+export const exportLabel = 'Export Sound Board JSON';
 
 export const playerUpdateInterval = 100;
 
