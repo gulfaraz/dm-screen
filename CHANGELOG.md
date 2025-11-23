@@ -1,3 +1,12 @@
+## [0.5.5](https://github.com/gulfaraz/dm-screen/compare/v0.5.4...v0.5.5) (2025-11-23)
+
+
+### Bug Fixes
+
+* handle player error ([9b5c5bd](https://github.com/gulfaraz/dm-screen/commit/9b5c5bdcd78dfd9a47424a4df8c9b99a95b9ab96))
+
+
+
 ## [0.5.4](https://github.com/gulfaraz/dm-screen/compare/v0.5.3...v0.5.4) (2023-05-24)
 
 
