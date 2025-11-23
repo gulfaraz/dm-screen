@@ -1,11 +1,12 @@
 <ion-toolbar>
     <ion-label slot="start" class="ion-padding bgm-name">
         <i *ngIf="loading">Loading...</i> {{ bgm.name }}
+        <i *ngIf="error">...error!</i>
     </ion-label>
     <ion-buttons class="ion-margin ion-justify-content-center">
         <ion-button
             (click)="playback(bgmPlaybackEvent.Reverse)"
-            [disabled]="loading"
+            [disabled]="loading || error"
         >
             <ion-icon name="play-back-outline"></ion-icon>
         </ion-button>
@@ -15,7 +16,7 @@
                     isPlaying ? bgmPlaybackEvent.Pause : bgmPlaybackEvent.Play
                 )
             "
-            [disabled]="loading"
+            [disabled]="loading || error"
         >
             <ion-icon
                 *ngIf="!loading"
@@ -33,7 +34,7 @@
         </ion-button>
         <ion-button
             (click)="playback(bgmPlaybackEvent.Forward)"
-            [disabled]="loading"
+            [disabled]="loading || error"
         >
             <ion-icon name="play-forward-outline"></ion-icon>
         </ion-button>
@@ -44,7 +45,7 @@
         snaps="true"
         ticks="false"
         [value]="player && player.getVolume()"
-        [disabled]="loading"
+        [disabled]="loading || error"
         class="ion-padding bgm-player-volume"
         (ionChange)="setVolume($any($event))"
     >

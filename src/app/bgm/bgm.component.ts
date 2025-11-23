@@ -25,6 +25,7 @@ export class BgmComponent {
     storageKey = 'bgm-sets';
     isInitialLoad = true;
     loading = true;
+    error = false;
     isPlaying = false;
 
     @HostListener('document:keydown', ['$event'])
@@ -120,6 +121,7 @@ export class BgmComponent {
     };
 
     debouncePlayerState = debounce((playerState: YT.PlayerState) => {
+        this.error = false;
         this.isPlaying = playerState === YT.PlayerState.PLAYING;
         this.loading = false;
 
@@ -130,6 +132,19 @@ export class BgmComponent {
             }),
         );
     }, sharedConfig.debounceTime);
+
+    playerError = () => {
+        this.error = true;
+        this.isPlaying = false;
+        this.loading = false;
+
+        this.bgmSets.forEach((bgmSet: BgmSet) =>
+            bgmSet.items.forEach((bgm: Bgm) => {
+                bgm.loading = false;
+                bgm.play = false;
+            }),
+        );
+    };
 
     volumeEvent = (volume: number) =>
         volume ? this.player.setVolume(volume) : null;

@@ -86,11 +86,28 @@
         [bgm]="bgm"
         [player]="player"
         [loading]="loading"
+        [error]="error"
         [isPlaying]="isPlaying"
         (playbackEvent)="playbackEvent($event)"
         (volumeEvent)="volumeEvent($event)"
     ></app-bgm-player>
     <ion-list lines="full">
+        <ion-row>
+            <ion-col class="ion-text-center">
+                <youtube-player
+                    [videoId]="getVideoId(bgm.link)"
+                    [disableCookies]="true"
+                    (stateChange)="debouncePlayerState($event.data)"
+                    (ready)="playerReady($event)"
+                    (error)="playerError()"
+                    [playerVars]="{
+                        loop: 1,
+                        autoplay: 1,
+                        playlist: getVideoId(bgm.link)
+                    }"
+                />
+            </ion-col>
+        </ion-row>
         <ion-accordion-group
             #accordionGroup
             [multiple]="true"
@@ -157,18 +174,6 @@
                 ></app-bgm-set-exporter>
             </ion-col>
         </ion-row>
-        <youtube-player
-            class="ion-hide"
-            [videoId]="bgm.link"
-            [disableCookies]="true"
-            (stateChange)="debouncePlayerState($event.data)"
-            (ready)="playerReady($event)"
-            [playerVars]="{
-                loop: 1,
-                autoplay: 1,
-                playlist: getVideoId(bgm.link)
-            }"
-        ></youtube-player>
     </ion-list>
     <app-footer></app-footer>
 </ion-content>
