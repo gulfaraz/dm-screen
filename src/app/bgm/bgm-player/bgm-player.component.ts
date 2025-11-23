@@ -13,6 +13,7 @@ export class BgmPlayerComponent implements OnInit {
     @Input() bgm!: Bgm;
     @Input() player!: YT.Player;
     @Input() loading = true;
+    @Input() error = false;
     @Input() isPlaying = false;
     @Output() playbackEvent = new EventEmitter<BgmPlaybackEvent>();
     @Output() volumeEvent = new EventEmitter<number>();
