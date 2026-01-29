@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 
 import sharedConfig from 'src/app/shared/config';
 import bgmConfig from '../bgm.config';
@@ -12,6 +12,8 @@ import { AlertController } from '@ionic/angular';
     standalone: false,
 })
 export class BgmEditorComponent {
+    private alertController = inject(AlertController);
+
     @Input() bgmSet!: BgmSet;
     @Input() bgmSetIndex!: number;
     @Output() deleteBgmSetEvent = new EventEmitter<number>();
@@ -20,8 +22,6 @@ export class BgmEditorComponent {
     debounceTime = sharedConfig.debounceTime;
     bgmPerSet = bgmConfig.bgmPerSet;
     colours = bgmConfig.colours;
-
-    constructor(private alertController: AlertController) {}
 
     addBgm = () => {
         this.bgmSet.items.push({} as Bgm);

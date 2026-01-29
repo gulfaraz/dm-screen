@@ -1,7 +1,11 @@
 <ion-toolbar>
     <ion-label slot="start" class="ion-padding bgm-name">
-        <i *ngIf="loading">Loading...</i> {{ bgm.name }}
-        <i *ngIf="error">...error!</i>
+        @if (loading) {
+        <i>Loading...</i>
+        } {{ bgm.name }}
+        @if (error) {
+        <i>...error!</i>
+        }
     </ion-label>
     <ion-buttons class="ion-margin ion-justify-content-center">
         <ion-button
@@ -18,19 +22,19 @@
             "
             [disabled]="loading || error"
         >
+            @if (!loading) {
             <ion-icon
-                *ngIf="!loading"
                 size="large"
                 slot="icon-only"
                 [name]="isPlaying ? 'pause' : 'play'"
             ></ion-icon>
-
+            } @if (loading) {
             <ion-spinner
-                *ngIf="loading"
                 slot="icon-only"
                 name="crescent"
                 class="loading-spinner"
             ></ion-spinner>
+            }
         </ion-button>
         <ion-button
             (click)="playback(bgmPlaybackEvent.Forward)"

@@ -8,7 +8,8 @@
     </ion-card-header>
     <ion-card-content>
         <ion-list>
-            <ion-item-sliding *ngFor="let character of characters">
+            @for (character of characters; track character) {
+            <ion-item-sliding>
                 <ion-item>
                     <ion-input
                         [style.color]="character.colour"
@@ -41,6 +42,7 @@
                     >
                 </ion-item-options>
             </ion-item-sliding>
+            }
             <form #addCharacterForm="ngForm" (ngSubmit)="addCharacter()">
                 <ion-item>
                     <ion-input
