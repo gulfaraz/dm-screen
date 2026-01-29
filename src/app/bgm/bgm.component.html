@@ -113,9 +113,9 @@
             [multiple]="true"
             [disabled]="loading"
         >
+            @for (bgmSet of bgmSets; track bgmSet; let bgmSetIndex = $index) {
             <ion-accordion
                 [value]="bgmSet.name"
-                *ngFor="let bgmSet of bgmSets; index as bgmSetIndex"
                 toggleIconSlot="start"
                 toggleIcon="caret-down-circle"
             >
@@ -131,6 +131,7 @@
                             (change)="save()"
                             name="name"
                             id="name"
+                            label=""
                         ></ion-input>
                     </ion-item>
                     <app-bgm-buttons
@@ -148,6 +149,7 @@
                     (changeEvent)="save()"
                 ></app-bgm-editor>
             </ion-accordion>
+            }
         </ion-accordion-group>
         <ion-row>
             <ion-col>

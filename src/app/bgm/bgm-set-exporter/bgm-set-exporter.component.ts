@@ -6,6 +6,7 @@ import { exportLabel } from '../bgm.config';
 @Component({
     selector: 'app-bgm-set-exporter',
     templateUrl: './bgm-set-exporter.component.html',
+    standalone: false,
 })
 export class BgmSetExporterComponent {
     @Input() storageKey!: string;

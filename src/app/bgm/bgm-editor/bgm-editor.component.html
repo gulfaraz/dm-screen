@@ -1,5 +1,6 @@
 <ion-grid class="ion-margin-horizontal">
-    <ion-row *ngFor="let bgm of bgmSet.items; index as bgmIndex">
+    @for (bgm of bgmSet.items; track bgm; let bgmIndex = $index) {
+    <ion-row>
         <ion-col size="5">
             <ion-item>
                 <ion-label
@@ -16,6 +17,7 @@
                     (change)="change()"
                     name="name"
                     id="name"
+                    label=""
                     [debounce]="debounceTime"
                 ></ion-input>
             </ion-item>
@@ -37,6 +39,7 @@
                     name="link"
                     id="link"
                     type="url"
+                    label=""
                     [debounce]="debounceTime"
                 ></ion-input>
             </ion-item>
@@ -56,7 +59,8 @@
             </ion-button>
         </ion-col>
     </ion-row>
-    <ion-row *ngIf="bgmSet.items.length < bgmPerSet">
+    } @if (bgmSet.items.length < bgmPerSet) {
+    <ion-row>
         <ion-col>
             <ion-item button detail="false" lines="none" (click)="addBgm()">
                 <ion-icon name="add" slot="start"></ion-icon>
@@ -79,4 +83,5 @@
             </ion-item>
         </ion-col>
     </ion-row>
+    }
 </ion-grid>

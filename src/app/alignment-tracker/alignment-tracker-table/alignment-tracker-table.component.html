@@ -8,11 +8,13 @@
     </ion-card-header>
     <ion-card-content>
         <ion-list>
-            <ion-item-sliding *ngFor="let character of characters">
+            @for (character of characters; track character) {
+            <ion-item-sliding>
                 <ion-item>
                     <ion-input
                         [style.color]="character.colour"
                         placeholder="Character Name"
+                        label=""
                         [debounce]="debounceTime"
                         [(ngModel)]="character.name"
                         (ionChange)="onChange(character, $any($event))"
@@ -40,6 +42,7 @@
                     >
                 </ion-item-options>
             </ion-item-sliding>
+            }
             <form #addCharacterForm="ngForm" (ngSubmit)="addCharacter()">
                 <ion-item>
                     <ion-input
@@ -48,6 +51,7 @@
                         [(ngModel)]="characterName"
                         name="name"
                         id="name"
+                        label=""
                         required="true"
                         minlength="2"
                         [appUniqueCharacterName]="characters"

@@ -5,6 +5,7 @@ import { Character } from '../alignment-tracker.character';
 @Component({
     selector: 'app-alignment-tracker-controls',
     templateUrl: './alignment-tracker-controls.component.html',
+    standalone: false,
 })
 export class AlignmentTrackerControlsComponent {
     @Input() characters!: Character[];
