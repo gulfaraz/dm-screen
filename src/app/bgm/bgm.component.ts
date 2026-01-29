@@ -1,7 +1,7 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { IonAccordionGroup } from '@ionic/angular';
 
-import * as bgmSets from './bgm.sets.json';
+import bgmSets from './bgm.sets.json';
 import {
     Bgm,
     BgmPlaybackEvent,

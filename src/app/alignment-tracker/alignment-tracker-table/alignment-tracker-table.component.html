@@ -13,6 +13,7 @@
                     <ion-input
                         [style.color]="character.colour"
                         placeholder="Character Name"
+                        label=""
                         [debounce]="debounceTime"
                         [(ngModel)]="character.name"
                         (ionChange)="onChange(character, $any($event))"
@@ -48,6 +49,7 @@
                         [(ngModel)]="characterName"
                         name="name"
                         id="name"
+                        label=""
                         required="true"
                         minlength="2"
                         [appUniqueCharacterName]="characters"
