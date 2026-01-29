@@ -17,6 +17,7 @@ import { Character } from '../alignment-tracker.character';
             multi: true,
         },
     ],
+    standalone: false,
 })
 export class UniqueCharacterNameDirective implements Validator {
     @Input('appUniqueCharacterName') characters: Character[] = [];

@@ -15,6 +15,7 @@ import sharedConfig from '../shared/config';
 @Component({
     selector: 'app-bgm',
     templateUrl: './bgm.component.html',
+    standalone: false,
 })
 export class BgmComponent {
     @ViewChild('accordionGroup') accordionGroup!: IonAccordionGroup;

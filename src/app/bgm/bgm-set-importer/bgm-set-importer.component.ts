@@ -6,5 +6,6 @@ import { JsonImporterComponent } from 'src/app/shared/json-importer/json-importe
 @Component({
     selector: 'app-bgm-set-importer',
     templateUrl: './bgm-set-importer.component.html',
+    standalone: false,
 })
 export class BgmSetImporterComponent extends JsonImporterComponent<BgmSet[]> {}

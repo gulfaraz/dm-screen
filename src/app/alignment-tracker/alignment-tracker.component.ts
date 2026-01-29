@@ -10,6 +10,7 @@ import {
 @Component({
     selector: 'app-alignment-tracker',
     templateUrl: './alignment-tracker.component.html',
+    standalone: false,
 })
 export class AlignmentTrackerComponent {
     characters: Character[] = characters;

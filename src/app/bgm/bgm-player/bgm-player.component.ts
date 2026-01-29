@@ -8,6 +8,7 @@ import { playerUpdateInterval } from '../bgm.config';
     selector: 'app-bgm-player',
     templateUrl: './bgm-player.component.html',
     styleUrls: ['./bgm-player.component.scss'],
+    standalone: false,
 })
 export class BgmPlayerComponent implements OnInit {
     @Input() bgm!: Bgm;

@@ -10,6 +10,7 @@ import {
 @Component({
     selector: 'app-json-importer',
     templateUrl: './json-importer.component.html',
+    standalone: false,
 })
 export class JsonImporterComponent<T> {
     @ViewChild('fileInput') fileInput!: ElementRef;

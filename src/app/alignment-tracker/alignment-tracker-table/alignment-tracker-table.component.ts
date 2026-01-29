@@ -17,6 +17,7 @@ import sharedConfig from '../../shared/config';
 @Component({
     selector: 'app-alignment-tracker-table',
     templateUrl: './alignment-tracker-table.component.html',
+    standalone: false,
 })
 export class AlignmentTrackerTableComponent {
     @Input() characters!: Character[];

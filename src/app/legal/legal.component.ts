@@ -5,6 +5,7 @@ import { NavigationEnd, Router } from '@angular/router';
     selector: 'app-legal',
     templateUrl: './legal.component.html',
     styleUrls: ['./legal.component.scss'],
+    standalone: false,
 })
 export class LegalComponent {
     route = '/terms';

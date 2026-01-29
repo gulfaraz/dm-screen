@@ -9,6 +9,7 @@ import { AlertController } from '@ionic/angular';
 @Component({
     selector: 'app-bgm-editor',
     templateUrl: './bgm-editor.component.html',
+    standalone: false,
 })
 export class BgmEditorComponent {
     @Input() bgmSet!: BgmSet;

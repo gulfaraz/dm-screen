@@ -7,6 +7,7 @@ import { colours } from '../bgm.config';
     selector: 'app-bgm-buttons',
     templateUrl: './bgm-buttons.component.html',
     styleUrls: ['./bgm-buttons.component.scss'],
+    standalone: false,
 })
 export class BgmButtonsComponent {
     @Input() bgmSet!: BgmSet;
