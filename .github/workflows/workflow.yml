@@ -10,6 +10,9 @@ jobs:
   test-build-deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+
     strategy:
       matrix:
         node-version: [24.x]
@@ -60,6 +63,3 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           git-message: "chore(release): {version}"
           release-count: 10
-
-permissions:
-  contents: write
