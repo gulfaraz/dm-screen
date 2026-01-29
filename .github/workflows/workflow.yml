@@ -32,7 +32,7 @@ jobs:
         if: github.event_name == 'push'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
+          folder: dist/browser
 
   bump-version:
     needs: [test-build-deploy]
