@@ -69,8 +69,6 @@ export class BgmComponent {
             this.isInitialLoad = false;
             this.loading = false;
         }
-
-        this.playbackEvent(BgmPlaybackEvent.Play);
     };
 
     togglePlayback = (togglePlaybackEvent: BgmTogglePlaybackEvent) => {
