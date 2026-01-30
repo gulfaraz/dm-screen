@@ -1,7 +1,14 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { App } from './app/app';
+import { provideBrowserGlobalErrorListeners } from '@angular/core';
+import { provideRouter, withHashLocation } from '@angular/router';
+import { routes } from './app/app.routes';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 
-import { AppModule } from './app/app.module';
-
-platformBrowserDynamic()
-    .bootstrapModule(AppModule)
-    .catch((err) => console.error(err));
+bootstrapApplication(App, {
+    providers: [
+        provideBrowserGlobalErrorListeners(),
+        provideRouter(routes, withHashLocation()),
+        provideIonicAngular({ mode: 'ios' }),
+    ],
+}).catch((err) => console.error(err));

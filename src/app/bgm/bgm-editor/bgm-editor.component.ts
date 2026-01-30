@@ -4,12 +4,43 @@ import sharedConfig from 'src/app/shared/config';
 import bgmConfig from '../bgm.config';
 
 import { Bgm, BgmSet } from '../bgm.type';
-import { AlertController } from '@ionic/angular';
+import {
+    AlertController,
+    IonButton,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonRow,
+} from '@ionic/angular/standalone';
+import { FormsModule } from '@angular/forms';
+
+import { addIcons } from 'ionicons';
+import { closeCircleOutline, add, trashOutline } from 'ionicons/icons';
+
+addIcons({
+    closeCircleOutline,
+    add,
+    trashOutline,
+});
 
 @Component({
     selector: 'app-bgm-editor',
     templateUrl: './bgm-editor.component.html',
-    standalone: false,
+    imports: [
+        IonGrid,
+        IonRow,
+        IonCol,
+        IonItem,
+        IonLabel,
+        IonInput,
+        IonButton,
+        IonIcon,
+        FormsModule,
+    ],
+    providers: [AlertController],
 })
 export class BgmEditorComponent {
     private alertController = inject(AlertController);

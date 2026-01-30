@@ -1,14 +1,52 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RangeCustomEvent } from '@ionic/angular';
 
 import { Bgm, BgmPlaybackEvent } from '../bgm.type';
 import { playerUpdateInterval } from '../bgm.config';
+import {
+    IonButton,
+    IonButtons,
+    IonIcon,
+    IonLabel,
+    IonProgressBar,
+    IonRange,
+    IonSpinner,
+    IonToolbar,
+    RangeCustomEvent,
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import {
+    playBackOutline,
+    pause,
+    play,
+    playForwardOutline,
+    volumeHighOutline,
+    volumeLowOutline,
+} from 'ionicons/icons';
+
+addIcons({
+    playBackOutline,
+    pause,
+    play,
+    playForwardOutline,
+    volumeHighOutline,
+    volumeLowOutline,
+});
 
 @Component({
     selector: 'app-bgm-player',
     templateUrl: './bgm-player.component.html',
     styleUrls: ['./bgm-player.component.scss'],
-    standalone: false,
+    imports: [
+        IonToolbar,
+        IonLabel,
+        IonButtons,
+        IonButton,
+        IonIcon,
+        IonSpinner,
+        IonRange,
+        IonProgressBar,
+    ],
 })
 export class BgmPlayerComponent implements OnInit {
     @Input() bgm!: Bgm;

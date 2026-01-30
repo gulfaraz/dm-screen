@@ -6,11 +6,27 @@ import {
     SetCharacterNameEvent,
     SetCharacterAlignmentEvent,
 } from './alignment-tracker.character';
+import { AlignmentTrackerGuideComponent } from './alignment-tracker-guide/alignment-tracker-guide.component';
+import { AlignmentTrackerControlsComponent } from './alignment-tracker-controls/alignment-tracker-controls.component';
+import { AlignmentTrackerChartComponent } from './alignment-tracker-chart/alignment-tracker-chart.component';
+import { AlignmentTrackerTableComponent } from './alignment-tracker-table/alignment-tracker-table.component';
+import { FooterComponent } from '../shared/footer/footer.component';
+import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-alignment-tracker',
     templateUrl: './alignment-tracker.component.html',
-    standalone: false,
+    imports: [
+        IonContent,
+        IonGrid,
+        IonRow,
+        IonCol,
+        AlignmentTrackerGuideComponent,
+        AlignmentTrackerControlsComponent,
+        AlignmentTrackerChartComponent,
+        AlignmentTrackerTableComponent,
+        FooterComponent,
+    ],
 })
 export class AlignmentTrackerComponent {
     characters: Character[] = characters;

@@ -1,5 +1,4 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
-import { IonAccordionGroup } from '@ionic/angular';
 
 import bgmSets from './bgm.sets.json';
 import {
@@ -11,11 +10,59 @@ import {
 import { jumpTime } from './bgm.config';
 import { debounce } from 'lodash';
 import sharedConfig from '../shared/config';
+import { BgmGuideComponent } from './bgm-guide/bgm-guide.component';
+import { BgmPlayerComponent } from './bgm-player/bgm-player.component';
+import { YouTubePlayer } from '@angular/youtube-player';
+import { FormsModule } from '@angular/forms';
+import { BgmButtonsComponent } from './bgm-buttons/bgm-buttons.component';
+import { BgmEditorComponent } from './bgm-editor/bgm-editor.component';
+import { BgmSetImporterComponent } from './bgm-set-importer/bgm-set-importer.component';
+import { BgmSetExporterComponent } from './bgm-set-exporter/bgm-set-exporter.component';
+import { FooterComponent } from '../shared/footer/footer.component';
+import {
+    IonAccordion,
+    IonAccordionGroup,
+    IonCol,
+    IonContent,
+    IonIcon,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonRow,
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { add, caretDownCircle } from 'ionicons/icons';
+
+addIcons({
+    add,
+    caretDownCircle,
+});
 
 @Component({
     selector: 'app-bgm',
     templateUrl: './bgm.component.html',
-    standalone: false,
+    imports: [
+        IonContent,
+        IonList,
+        IonRow,
+        IonCol,
+        IonAccordionGroup,
+        IonAccordion,
+        IonItem,
+        IonInput,
+        IonIcon,
+        IonLabel,
+        BgmGuideComponent,
+        BgmPlayerComponent,
+        YouTubePlayer,
+        FormsModule,
+        BgmButtonsComponent,
+        BgmEditorComponent,
+        BgmSetImporterComponent,
+        BgmSetExporterComponent,
+        FooterComponent,
+    ],
 })
 export class BgmComponent {
     @ViewChild('accordionGroup') accordionGroup!: IonAccordionGroup;

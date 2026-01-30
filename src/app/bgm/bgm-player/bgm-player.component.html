@@ -12,7 +12,7 @@
             (click)="playback(bgmPlaybackEvent.Reverse)"
             [disabled]="loading || error"
         >
-            <ion-icon name="play-back-outline"></ion-icon>
+            <ion-icon name="play-back-outline" />
         </ion-button>
         <ion-button
             (click)="
@@ -27,20 +27,20 @@
                 size="large"
                 slot="icon-only"
                 [name]="isPlaying ? 'pause' : 'play'"
-            ></ion-icon>
+            />
             } @if (loading) {
             <ion-spinner
                 slot="icon-only"
                 name="crescent"
                 class="loading-spinner"
-            ></ion-spinner>
+            />
             }
         </ion-button>
         <ion-button
             (click)="playback(bgmPlaybackEvent.Forward)"
             [disabled]="loading || error"
         >
-            <ion-icon name="play-forward-outline"></ion-icon>
+            <ion-icon name="play-forward-outline" />
         </ion-button>
     </ion-buttons>
     <ion-range
@@ -53,8 +53,8 @@
         class="ion-padding bgm-player-volume"
         (ionChange)="setVolume($any($event))"
     >
-        <ion-icon slot="start" name="volume-low-outline"></ion-icon>
-        <ion-icon slot="end" name="volume-high-outline"></ion-icon>
+        <ion-icon slot="start" name="volume-low-outline" />
+        <ion-icon slot="end" name="volume-high-outline" />
     </ion-range>
     <ion-progress-bar
         class="bgm-player-progress-bar"
@@ -62,5 +62,5 @@
         [buffer]="bufferedTime"
         [type]="player ? 'determinate' : 'indeterminate'"
         (click)="seekVideo($event)"
-    ></ion-progress-bar>
+    />
 </ion-toolbar>

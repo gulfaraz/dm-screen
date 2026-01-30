@@ -1,12 +1,12 @@
 <ion-content>
     <ion-grid [style.padding]="0">
-        <app-alignment-tracker-guide></app-alignment-tracker-guide>
+        <app-alignment-tracker-guide />
         <ion-row>
             <ion-col>
                 <app-alignment-tracker-controls
                     [characters]="characters"
                     (importCharactersEvent)="setCharacters(import($event))"
-                ></app-alignment-tracker-controls>
+                />
             </ion-col>
         </ion-row>
         <ion-row>
@@ -15,7 +15,7 @@
                     [characters]="characters"
                     [character]="character"
                     (setCharacterAlignmentEvent)="setCharacterAlignment($event)"
-                ></app-alignment-tracker-chart>
+                />
             </ion-col>
             <ion-col size="5">
                 <app-alignment-tracker-table
@@ -24,9 +24,9 @@
                     (deleteCharacterEvent)="deleteCharacter($event)"
                     (setCharacterNameEvent)="setCharacterName($event)"
                     (fillCharacterEvent)="fillCharacter($event)"
-                ></app-alignment-tracker-table>
+                />
             </ion-col>
         </ion-row>
     </ion-grid>
-    <app-footer></app-footer>
+    <app-footer />
 </ion-content>

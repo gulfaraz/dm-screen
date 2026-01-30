@@ -18,7 +18,7 @@
                         [debounce]="debounceTime"
                         [(ngModel)]="character.name"
                         (ionChange)="onChange(character, $any($event))"
-                    ></ion-input>
+                    />
                     <ion-button
                         slot="end"
                         size="small"
@@ -55,7 +55,7 @@
                         required="true"
                         minlength="2"
                         [appUniqueCharacterName]="characters"
-                    ></ion-input>
+                    />
                     <ion-button
                         [color]="
                             addCharacterForm.form.valid ? 'success' : 'medium'

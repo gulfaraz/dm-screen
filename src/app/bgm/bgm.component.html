@@ -1,5 +1,5 @@
 <ion-content>
-    <app-bgm-guide></app-bgm-guide>
+    <app-bgm-guide />
     <app-bgm-player
         [bgm]="bgm"
         [player]="player"
@@ -8,7 +8,7 @@
         [isPlaying]="isPlaying"
         (playbackEvent)="playbackEvent($event)"
         (volumeEvent)="volumeEvent($event)"
-    ></app-bgm-player>
+    />
     <ion-list lines="full">
         <ion-row>
             <ion-col class="ion-text-center">
@@ -50,14 +50,14 @@
                             name="name"
                             id="name"
                             label=""
-                        ></ion-input>
+                        />
                     </ion-item>
                     <app-bgm-buttons
                         slot="end"
                         [bgmSet]="bgmSet"
                         [disabled]="loading"
                         (togglePlaybackEvent)="togglePlayback($event)"
-                    ></app-bgm-buttons>
+                    />
                 </ion-item>
                 <app-bgm-editor
                     slot="content"
@@ -65,7 +65,7 @@
                     [bgmSetIndex]="bgmSetIndex"
                     (deleteBgmSetEvent)="deleteBgmSet($event)"
                     (changeEvent)="save()"
-                ></app-bgm-editor>
+                />
             </ion-accordion>
             }
         </ion-accordion-group>
@@ -79,21 +79,17 @@
                     (click)="addBgmSet()"
                     [disabled]="loading"
                 >
-                    <ion-icon name="add" slot="start"></ion-icon>
+                    <ion-icon name="add" slot="start" />
                     <ion-label>Add Sound Group</ion-label>
                 </ion-item>
             </ion-col>
             <ion-col size="3">
-                <app-bgm-set-importer
-                    (importEvent)="import($event)"
-                ></app-bgm-set-importer>
+                <app-bgm-set-importer (importEvent)="import($event)" />
             </ion-col>
             <ion-col size="3">
-                <app-bgm-set-exporter
-                    [storageKey]="storageKey"
-                ></app-bgm-set-exporter>
+                <app-bgm-set-exporter [storageKey]="storageKey" />
             </ion-col>
         </ion-row>
     </ion-list>
-    <app-footer></app-footer>
+    <app-footer />
 </ion-content>

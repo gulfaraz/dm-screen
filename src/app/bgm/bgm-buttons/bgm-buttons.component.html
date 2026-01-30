@@ -12,13 +12,9 @@
     <ion-icon
         slot="start"
         [name]="bgm.play ? 'pause-outline' : 'play-outline'"
-    ></ion-icon>
+    />
     } @if (bgm.loading) {
-    <ion-spinner
-        slot="start"
-        name="crescent"
-        class="loading-spinner"
-    ></ion-spinner>
+    <ion-spinner slot="start" name="crescent" class="loading-spinner" />
     }
     <ion-label>{{ bgm.name }}</ion-label>
 </ion-button>

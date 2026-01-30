@@ -21,7 +21,6 @@ import config from './alignment-tracker-chart.config';
 @Component({
     selector: 'app-alignment-tracker-chart',
     templateUrl: './alignment-tracker-chart.component.html',
-    standalone: false,
 })
 export class AlignmentTrackerChartComponent
     implements AfterViewInit, OnChanges

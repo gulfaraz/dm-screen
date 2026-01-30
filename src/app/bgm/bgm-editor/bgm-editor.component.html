@@ -19,7 +19,7 @@
                     id="name"
                     label=""
                     [debounce]="debounceTime"
-                ></ion-input>
+                />
             </ion-item>
         </ion-col>
         <ion-col size="6">
@@ -41,7 +41,7 @@
                     type="url"
                     label=""
                     [debounce]="debounceTime"
-                ></ion-input>
+                />
             </ion-item>
         </ion-col>
         <ion-col>
@@ -53,9 +53,10 @@
                 title="Delete Sound"
             >
                 <ion-icon
-                    slot="icon-only"
                     name="close-circle-outline"
-                ></ion-icon>
+                    slot="icon-only"
+                    size="large"
+                />
             </ion-button>
         </ion-col>
     </ion-row>
@@ -63,7 +64,7 @@
     <ion-row>
         <ion-col>
             <ion-item button detail="false" lines="none" (click)="addBgm()">
-                <ion-icon name="add" slot="start"></ion-icon>
+                <ion-icon name="add" slot="start" />
                 <ion-label>Add Sound</ion-label>
             </ion-item>
         </ion-col>
@@ -74,11 +75,7 @@
                 lines="none"
                 (click)="deleteBgmSet()"
             >
-                <ion-icon
-                    name="trash-outline"
-                    slot="start"
-                    color="danger"
-                ></ion-icon>
+                <ion-icon name="trash-outline" slot="start" color="danger" />
                 <ion-label color="danger">Delete Sound Group</ion-label>
             </ion-item>
         </ion-col>

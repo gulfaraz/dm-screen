@@ -6,11 +6,19 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
+import { IonButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { pushOutline } from 'ionicons/icons';
+
+addIcons({
+    pushOutline,
+});
 
 @Component({
     selector: 'app-json-importer',
     templateUrl: './json-importer.component.html',
-    standalone: false,
+    imports: [IonButton, IonIcon, IonLabel],
 })
 export class JsonImporterComponent<T> {
     @ViewChild('fileInput') fileInput!: ElementRef;
