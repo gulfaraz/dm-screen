@@ -19,6 +19,11 @@ export const routes: Routes = [
             ),
     },
     {
+        path: 'notes',
+        loadComponent: () =>
+            import('./notes/notes.component').then((m) => m.NotesComponent),
+    },
+    {
         path: 'rules',
         loadComponent: () =>
             import('./rules/rules.component').then((m) => m.RulesComponent),
