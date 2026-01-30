@@ -12,6 +12,7 @@ import { BgmPlayerComponent } from './bgm-player/bgm-player.component';
 import { BgmButtonsComponent } from './bgm-buttons/bgm-buttons.component';
 import { BgmSetImporterComponent } from './bgm-set-importer/bgm-set-importer.component';
 import { BgmSetExporterComponent } from './bgm-set-exporter/bgm-set-exporter.component';
+import { BgmGuideComponent } from './bgm-guide/bgm-guide.component';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { BgmSetExporterComponent } from './bgm-set-exporter/bgm-set-exporter.com
         BgmButtonsComponent,
         BgmSetImporterComponent,
         BgmSetExporterComponent,
+        BgmGuideComponent,
     ],
     exports: [
         BgmComponent,
@@ -37,6 +39,7 @@ import { BgmSetExporterComponent } from './bgm-set-exporter/bgm-set-exporter.com
         BgmButtonsComponent,
         BgmSetImporterComponent,
         BgmSetExporterComponent,
+        BgmGuideComponent,
     ],
 })
 export class BgmModule {}

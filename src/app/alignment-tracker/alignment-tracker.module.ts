@@ -10,6 +10,7 @@ import { AlignmentTrackerControlsComponent } from './alignment-tracker-controls/
 import { AlignmentTrackerChartComponent } from './alignment-tracker-chart/alignment-tracker-chart.component';
 import { AlignmentTrackerTableComponent } from './alignment-tracker-table/alignment-tracker-table.component';
 import { UniqueCharacterNameDirective } from './alignment-tracker-table/unique-character-name.directive';
+import { AlignmentTrackerGuideComponent } from './alignment-tracker-guide/alignment-tracker-guide.component';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { UniqueCharacterNameDirective } from './alignment-tracker-table/unique-c
         AlignmentTrackerChartComponent,
         AlignmentTrackerTableComponent,
         UniqueCharacterNameDirective,
+        AlignmentTrackerGuideComponent,
     ],
     exports: [
         AlignmentTrackerComponent,
@@ -34,6 +36,7 @@ import { UniqueCharacterNameDirective } from './alignment-tracker-table/unique-c
         AlignmentTrackerChartComponent,
         AlignmentTrackerTableComponent,
         UniqueCharacterNameDirective,
+        AlignmentTrackerGuideComponent,
     ],
 })
 export class AlignmentTrackerModule {}
