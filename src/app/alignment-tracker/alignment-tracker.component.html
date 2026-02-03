@@ -2,7 +2,7 @@
     <ion-grid [style.padding]="0">
         <app-alignment-tracker-guide />
         <ion-row>
-            <ion-col>
+            <ion-col class="ion-no-padding">
                 <app-alignment-tracker-controls
                     [characters]="characters"
                     (importCharactersEvent)="setCharacters(import($event))"
