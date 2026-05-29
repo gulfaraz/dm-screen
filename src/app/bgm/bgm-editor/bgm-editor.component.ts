@@ -71,12 +71,12 @@ export class BgmEditorComponent {
         const alert = await this.alertController.create({
             header: 'Delete Sound Group',
             subHeader: 'This action cannot be undone.',
-            message: `Are you sure you want to delete<br />Sound Group <b>${this.bgmSet.name}</b>?`,
+            message: `Are you sure you want to delete Sound Group: ${this.bgmSet.name}?`,
             buttons: [
                 { text: 'Cancel', role: 'cancel' },
                 {
                     text: 'Delete',
-                    role: 'confirm',
+                    role: 'destructive',
                     handler: () =>
                         this.deleteBgmSetEvent.emit(this.bgmSetIndex),
                 },
