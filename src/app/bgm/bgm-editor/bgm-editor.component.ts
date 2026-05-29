@@ -29,6 +29,7 @@ addIcons({
 @Component({
     selector: 'app-bgm-editor',
     templateUrl: './bgm-editor.component.html',
+    styleUrls: ['./bgm-editor.component.scss'],
     imports: [
         IonGrid,
         IonRow,

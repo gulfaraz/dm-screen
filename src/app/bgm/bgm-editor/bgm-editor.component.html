@@ -1,4 +1,4 @@
-<ion-grid class="ion-margin-horizontal">
+<ion-grid class="ion-padding-horizontal ion-display-block">
     @for (bgm of bgmSet.items; track bgm; let bgmIndex = $index) {
     <ion-row>
         <ion-col size="5">
@@ -44,7 +44,7 @@
                 />
             </ion-item>
         </ion-col>
-        <ion-col>
+        <ion-col class="ion-text-center">
             <ion-button
                 fill="clear"
                 color="danger"
@@ -61,7 +61,7 @@
         </ion-col>
     </ion-row>
     } @if (bgmSet.items.length < bgmPerSet) {
-    <ion-row>
+    <ion-row class="ion-padding-vertical">
         <ion-col>
             <ion-item button detail="false" lines="none" (click)="addBgm()">
                 <ion-icon name="add" slot="start" />
