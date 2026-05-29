@@ -29,19 +29,20 @@ import {
     IonItem,
     IonLabel,
     IonList,
+    IonReorder,
+    IonReorderGroup,
     IonRow,
+    ReorderEndCustomEvent,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { add, caretDownCircle } from 'ionicons/icons';
+import { add } from 'ionicons/icons';
 
-addIcons({
-    add,
-    caretDownCircle,
-});
+addIcons({ add });
 
 @Component({
     selector: 'app-bgm',
     templateUrl: './bgm.component.html',
+    styleUrls: ['./bgm.component.scss'],
     imports: [
         IonContent,
         IonList,
@@ -53,6 +54,8 @@ addIcons({
         IonInput,
         IonIcon,
         IonLabel,
+        IonReorderGroup,
+        IonReorder,
         BgmGuideComponent,
         BgmPlayerComponent,
         YouTubePlayer,
@@ -214,4 +217,16 @@ export class BgmComponent {
         this.bgmSets = bgmSets;
         this.setBgm(this.bgmSets[0].items[0]);
     };
+
+    handleReorderEnd(event: ReorderEndCustomEvent) {
+        if (event.detail.from === event.detail.to) {
+            return;
+        }
+
+        const movedBgmSet = this.bgmSets.splice(event.detail.from, 1)[0];
+        this.bgmSets.splice(event.detail.to, 0, movedBgmSet);
+        this.save();
+
+        event.detail.complete();
+    }
 }

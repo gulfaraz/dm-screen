@@ -31,43 +31,46 @@
             [multiple]="true"
             [disabled]="loading"
         >
-            @for (bgmSet of bgmSets; track bgmSet; let bgmSetIndex = $index) {
-            <ion-accordion
-                [value]="bgmSet.name"
-                toggleIconSlot="start"
-                toggleIcon="caret-down-circle"
+            <ion-reorder-group
+                [disabled]="false"
+                (ionReorderEnd)="handleReorderEnd($any($event))"
             >
-                <ion-item slot="header">
-                    <ion-item lines="none" class="ion-margin-vertical">
-                        <ion-input
-                            class="ion-no-padding"
-                            [placeholder]="
-                                'Sound Group ' + (bgmSetIndex + 1) + ' Name'
-                            "
-                            [(ngModel)]="bgmSet.name"
-                            (click)="$event.stopPropagation()"
-                            (change)="save()"
-                            name="name"
-                            id="name"
-                            label=""
+                @for (bgmSet of bgmSets; track bgmSet; let bgmSetIndex = $index)
+                {
+                <ion-accordion [value]="bgmSet.name">
+                    <ion-item slot="header">
+                        <ion-reorder slot="start"></ion-reorder>
+                        <ion-item lines="none" class="ion-margin-vertical">
+                            <ion-input
+                                class="ion-no-padding"
+                                [placeholder]="
+                                    'Sound Group ' + (bgmSetIndex + 1) + ' Name'
+                                "
+                                [(ngModel)]="bgmSet.name"
+                                (click)="$event.stopPropagation()"
+                                (change)="save()"
+                                name="name"
+                                id="name"
+                                label=""
+                            />
+                        </ion-item>
+                        <app-bgm-buttons
+                            slot="end"
+                            [bgmSet]="bgmSet"
+                            [disabled]="loading"
+                            (togglePlaybackEvent)="togglePlayback($event)"
                         />
                     </ion-item>
-                    <app-bgm-buttons
-                        slot="end"
+                    <app-bgm-editor
+                        slot="content"
                         [bgmSet]="bgmSet"
-                        [disabled]="loading"
-                        (togglePlaybackEvent)="togglePlayback($event)"
+                        [bgmSetIndex]="bgmSetIndex"
+                        (deleteBgmSetEvent)="deleteBgmSet($event)"
+                        (changeEvent)="save()"
                     />
-                </ion-item>
-                <app-bgm-editor
-                    slot="content"
-                    [bgmSet]="bgmSet"
-                    [bgmSetIndex]="bgmSetIndex"
-                    (deleteBgmSetEvent)="deleteBgmSet($event)"
-                    (changeEvent)="save()"
-                />
-            </ion-accordion>
-            }
+                </ion-accordion>
+                }
+            </ion-reorder-group>
         </ion-accordion-group>
         <ion-row>
             <ion-col>
