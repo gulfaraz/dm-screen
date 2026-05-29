@@ -12,7 +12,7 @@
                 <ion-input
                     [color]="colours[bgmIndex]"
                     class="ion-text-center"
-                    placeholder="Why is you so mean to me"
+                    [placeholder]="defaultBgm.name"
                     [(ngModel)]="bgm.name"
                     (change)="change()"
                     name="name"
@@ -33,7 +33,7 @@
                 <ion-input
                     [color]="colours[bgmIndex]"
                     class="ion-text-center"
-                    placeholder="https://youtube.com/clip/UgkxAEwXxj27ejYI1QkTz9fgrrCYGO1XEkW_"
+                    [placeholder]="defaultBgm.link"
                     [(ngModel)]="bgm.link"
                     (change)="change()"
                     name="link"

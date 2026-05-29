@@ -7,7 +7,7 @@ import {
     BgmSet,
     BgmTogglePlaybackEvent,
 } from './bgm.type';
-import { jumpTime } from './bgm.config';
+import { defaultBgm, jumpTime } from './bgm.config';
 import { debounce } from 'lodash';
 import sharedConfig from '../shared/config';
 import { BgmGuideComponent } from './bgm-guide/bgm-guide.component';
@@ -153,12 +153,16 @@ export class BgmComponent {
 
     addBgmSet = () => {
         const name = `Sound Group ${this.bgmSets.length + 1}`;
-        this.bgmSets.push({ name, items: [] } as BgmSet);
+        this.bgmSets.push({
+            name,
+            items: [{ ...defaultBgm }, { ...defaultBgm }],
+        });
         if (Array.isArray(this.accordionGroup.value)) {
             this.accordionGroup.value.push(name);
         } else {
             this.accordionGroup.value = name;
         }
+        this.save();
     };
 
     deleteBgmSet = (bgmSetIndex: number) => {

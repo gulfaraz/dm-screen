@@ -53,6 +53,7 @@ export class BgmEditorComponent {
     debounceTime = sharedConfig.debounceTime;
     bgmPerSet = bgmConfig.bgmPerSet;
     colours = bgmConfig.colours;
+    defaultBgm = bgmConfig.defaultBgm;
 
     addBgm = () => {
         this.bgmSet.items.push({} as Bgm);
