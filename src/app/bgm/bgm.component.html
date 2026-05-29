@@ -13,16 +13,17 @@
         <ion-row>
             <ion-col class="ion-text-center">
                 <youtube-player
-                    [videoId]="getVideoId(bgm.link)"
+                    [videoId]="getVideoId(bgm?.link)"
                     [disableCookies]="true"
                     (stateChange)="debouncePlayerState($event.data)"
                     (ready)="playerReady($event)"
                     (error)="playerError()"
                     [playerVars]="{
                         loop: 1,
-                        autoplay: 1,
-                        playlist: getVideoId(bgm.link)
+                        autoplay: 0,
+                        playlist: getVideoId(bgm?.link)
                     }"
+                    disablePlaceholder
                 />
             </ion-col>
         </ion-row>

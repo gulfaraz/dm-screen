@@ -71,13 +71,26 @@ export class BgmComponent {
     @ViewChild('accordionGroup') accordionGroup!: IonAccordionGroup;
 
     player!: YT.Player;
-    bgmSets: BgmSet[] = Array.from(bgmSets);
-    bgm = this.bgmSets[0].items[0];
+    bgmSets: BgmSet[] = [];
+    bgm: Bgm | null = null;
     storageKey = 'bgm-sets';
     isInitialLoad = true;
     loading = true;
     error = false;
     isPlaying = false;
+
+    constructor() {
+        try {
+            const storedBgmSets = localStorage.getItem(this.storageKey);
+            if (storedBgmSets && storedBgmSets.length > 2) {
+                this.import(JSON.parse(storedBgmSets));
+            } else {
+                this.import(Array.from(bgmSets));
+            }
+        } catch {
+            this.import(Array.from(bgmSets));
+        }
+    }
 
     @HostListener('document:keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
@@ -100,10 +113,10 @@ export class BgmComponent {
         }
     }
 
-    getVideoId = (url: string) => {
+    getVideoId = (url?: string) => {
         const regExp =
             /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-        const match = url.match(regExp);
+        const match = url?.match(regExp);
         return match && match[7].length == 11 ? match[7] : '';
     };
 
@@ -111,11 +124,6 @@ export class BgmComponent {
         this.player = event.target;
 
         if (this.isInitialLoad) {
-            const storedBgmSets = localStorage.getItem(this.storageKey);
-            if (storedBgmSets && storedBgmSets.length > 2) {
-                this.import(JSON.parse(storedBgmSets));
-            }
-
             this.isInitialLoad = false;
             this.loading = false;
             this.playbackEvent(BgmPlaybackEvent.Pause);
@@ -127,7 +135,7 @@ export class BgmComponent {
 
         const isPlaying = this.player.getPlayerState() === 1;
         const isToggleOnly = this.bgm === togglePlaybackEvent.bgm;
-        if (!isToggleOnly) {
+        if (!isToggleOnly && togglePlaybackEvent.bgm) {
             this.setBgm(togglePlaybackEvent.bgm);
         } else {
             if (isPlaying) {

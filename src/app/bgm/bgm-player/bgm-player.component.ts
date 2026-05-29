@@ -49,7 +49,7 @@ addIcons({
     ],
 })
 export class BgmPlayerComponent implements OnInit {
-    @Input() bgm!: Bgm;
+    @Input() bgm: Bgm | null = null;
     @Input() player!: YT.Player;
     @Input() loading = true;
     @Input() error = false;

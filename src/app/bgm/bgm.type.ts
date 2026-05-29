@@ -12,7 +12,7 @@ export interface Bgm {
 
 export interface BgmTogglePlaybackEvent {
     event: Event;
-    bgm: Bgm;
+    bgm: Bgm | null;
 }
 
 export enum BgmPlaybackEvent {
