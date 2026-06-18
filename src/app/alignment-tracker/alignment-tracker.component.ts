@@ -39,12 +39,13 @@ export class AlignmentTrackerComponent {
     constructor() {
         const storedCharacters = localStorage.getItem(this.storageKey);
         if (storedCharacters && storedCharacters.length > 2) {
-            this.import(JSON.parse(storedCharacters));
+            this.characters = this.import(JSON.parse(storedCharacters));
+            this.save();
         }
     }
 
-    import = (characters: Character[]) => {
-        this.characters = characters.map(
+    import = (characters: Character[]) =>
+        characters.map(
             (character: Character) =>
                 new Character(
                     character.name,
@@ -53,8 +54,6 @@ export class AlignmentTrackerComponent {
                     character.colour,
                 ),
         );
-        this.save();
-    };
 
     save = () =>
         localStorage.setItem(this.storageKey, JSON.stringify(this.characters));
