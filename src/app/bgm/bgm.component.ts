@@ -20,7 +20,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
-import { debounce } from 'lodash';
+import debounce from 'lodash.debounce';
 
 import sharedConfig from '../shared/config';
 import { FooterComponent } from '../shared/footer/footer.component';
@@ -259,6 +259,8 @@ export class BgmComponent {
 
     import = (bgmSets: BgmSet[]) => {
         this.bgmSets = bgmSets;
+        this.save();
+
         this.setBgm(this.bgmSets[0].items[0]);
     };
 

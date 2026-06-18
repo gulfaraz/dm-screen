@@ -190,6 +190,8 @@ export class RulesComponent {
 
     import = (rules: Rule[]) => {
         this.rules = rules;
+        this.save();
+
         this.rule = null;
     };
 

@@ -16,7 +16,7 @@ export const defaultScene = {
 };
 
 export const fuseOptions: IFuseOptions<Scene> = {
-    keys: ['title', 'date', 'summary', 'notes'],
+    keys: ['title', 'date', 'description', 'notes'],
     ...defaultFuseOptions,
 };
 
