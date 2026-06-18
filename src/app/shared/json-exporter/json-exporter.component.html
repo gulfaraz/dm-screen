@@ -1,4 +1,22 @@
-<ion-button size="small" (click)="export()">
-    <ion-icon slot="start" name="download-outline" />
-    <ion-label>{{ label }}</ion-label>
-</ion-button>
+@if (variant === 'item') {
+    <ion-item
+        color="light"
+        class="ion-padding-vertical ion-text-center"
+        button
+        detail="false"
+        lines="none"
+        (click)="export()"
+    >
+        <ion-icon
+            name="download-outline"
+            slot="start"
+            class="ion-no-margin ion-margin-start"
+        />
+        <ion-label>{{ label }}</ion-label>
+    </ion-item>
+} @else {
+    <ion-button size="small" (click)="export()">
+        <ion-icon slot="start" name="download-outline" />
+        <ion-label>{{ label }}</ion-label>
+    </ion-button>
+}

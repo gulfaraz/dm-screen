@@ -12,8 +12,8 @@ import {
 import * as d3 from 'd3';
 
 import {
-    Character,
     Alignment,
+    Character,
     SetCharacterAlignmentEvent,
 } from '../alignment-tracker.character';
 import config from './alignment-tracker-chart.config';

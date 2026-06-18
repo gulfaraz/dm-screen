@@ -1,0 +1,30 @@
+<ion-card class="ion-no-margin" (click)="openRule.emit()">
+    <ion-card-header
+        class="ion-display-flex ion-flex-row ion-align-items-center ion-justify-content-between"
+    >
+        <ion-card-title class="text-2xl">
+            {{ rule.title || 'Untitled Rule' }}
+        </ion-card-title>
+        <ion-buttons>
+            <ion-button
+                size="small"
+                color="medium"
+                (click)="move($event, 'up')"
+                [disabled]="disableMove || isFirst"
+                title="Move Up"
+            >
+                <ion-icon slot="icon-only" name="arrow-up" />
+            </ion-button>
+            <ion-button
+                size="small"
+                color="medium"
+                (click)="move($event, 'down')"
+                [disabled]="disableMove || isLast"
+                title="Move Down"
+            >
+                <ion-icon slot="icon-only" name="arrow-down" />
+            </ion-button>
+        </ion-buttons>
+    </ion-card-header>
+    <markdown [data]="rule.summary" />
+</ion-card>

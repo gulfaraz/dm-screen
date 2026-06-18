@@ -5,6 +5,7 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import {
     InputCustomEvent,
     IonButton,
@@ -19,13 +20,12 @@ import {
     IonItemSliding,
     IonList,
 } from '@ionic/angular/standalone';
-import { NgForm, FormsModule } from '@angular/forms';
 
+import sharedConfig from '../../shared/config';
 import {
     Character,
     SetCharacterNameEvent,
 } from '../alignment-tracker.character';
-import sharedConfig from '../../shared/config';
 import { UniqueCharacterNameDirective } from './unique-character-name.directive';
 
 @Component({

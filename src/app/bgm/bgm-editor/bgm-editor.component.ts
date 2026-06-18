@@ -1,9 +1,5 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-
-import sharedConfig from 'src/app/shared/config';
-import bgmConfig from '../bgm.config';
-
-import { Bgm, BgmSet } from '../bgm.type';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
     AlertController,
     IonButton,
@@ -15,21 +11,18 @@ import {
     IonLabel,
     IonRow,
 } from '@ionic/angular/standalone';
-import { FormsModule } from '@angular/forms';
-
 import { addIcons } from 'ionicons';
-import { closeCircleOutline, add, trashOutline } from 'ionicons/icons';
+import { add, closeCircleOutline, trashOutline } from 'ionicons/icons';
+import sharedConfig from 'src/app/shared/config';
 
-addIcons({
-    closeCircleOutline,
-    add,
-    trashOutline,
-});
+import bgmConfig from '../bgm.config';
+import { Bgm, BgmSet } from '../bgm.type';
+
+addIcons({ closeCircleOutline, add, trashOutline });
 
 @Component({
     selector: 'app-bgm-editor',
     templateUrl: './bgm-editor.component.html',
-    styleUrls: ['./bgm-editor.component.scss'],
     imports: [
         IonGrid,
         IonRow,
@@ -47,8 +40,7 @@ export class BgmEditorComponent {
     private alertController = inject(AlertController);
 
     @Input() bgmSet!: BgmSet;
-    @Input() bgmSetIndex!: number;
-    @Output() deleteBgmSetEvent = new EventEmitter<number>();
+    @Output() deleteBgmSetEvent = new EventEmitter<BgmSet['id']>();
     @Output() changeEvent = new EventEmitter();
 
     debounceTime = sharedConfig.debounceTime;
@@ -78,8 +70,7 @@ export class BgmEditorComponent {
                 {
                     text: 'Delete',
                     role: 'destructive',
-                    handler: () =>
-                        this.deleteBgmSetEvent.emit(this.bgmSetIndex),
+                    handler: () => this.deleteBgmSetEvent.emit(this.bgmSet.id),
                 },
             ],
         });

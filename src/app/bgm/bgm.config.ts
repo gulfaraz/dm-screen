@@ -1,3 +1,5 @@
+export const name = 'Sound Board';
+
 export const bgmPerSet = 6;
 
 export const jumpTime = 15;
@@ -11,19 +13,22 @@ export const colours = [
     'danger',
 ];
 
-export const exportLabel = 'Export Sound Board JSON';
+export const importLabel = `Import ${name} JSON`;
+export const exportLabel = `Export ${name} JSON`;
 
 export const playerUpdateInterval = 100;
 
 export const defaultBgm = {
     name: 'Why is you so mean to me',
-    link: 'https://youtube.com/clip/UgkxAEwXxj27ejYI1QkTz9fgrrCYGO1XEkW_',
+    link: 'https://youtu.be/cM6hnp3iB5U',
 };
 
 export default {
+    name,
     bgmPerSet,
     jumpTime,
     colours,
+    importLabel,
     exportLabel,
     playerUpdateInterval,
     defaultBgm,

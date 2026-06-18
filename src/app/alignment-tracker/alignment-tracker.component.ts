@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
+import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/angular/standalone';
 
+import { FooterComponent } from '../shared/footer/footer.component';
+import { GuideComponent } from '../shared/guide/guide.component';
 import {
     Character,
     characters,
-    SetCharacterNameEvent,
     SetCharacterAlignmentEvent,
+    SetCharacterNameEvent,
 } from './alignment-tracker.character';
-import { AlignmentTrackerGuideComponent } from './alignment-tracker-guide/alignment-tracker-guide.component';
-import { AlignmentTrackerControlsComponent } from './alignment-tracker-controls/alignment-tracker-controls.component';
+import { name } from './alignment-tracker.config';
 import { AlignmentTrackerChartComponent } from './alignment-tracker-chart/alignment-tracker-chart.component';
+import { AlignmentTrackerControlsComponent } from './alignment-tracker-controls/alignment-tracker-controls.component';
 import { AlignmentTrackerTableComponent } from './alignment-tracker-table/alignment-tracker-table.component';
-import { FooterComponent } from '../shared/footer/footer.component';
-import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/angular/standalone';
 
 @Component({
     selector: 'app-alignment-tracker',
@@ -21,22 +22,25 @@ import { IonCol, IonContent, IonGrid, IonRow } from '@ionic/angular/standalone';
         IonGrid,
         IonRow,
         IonCol,
-        AlignmentTrackerGuideComponent,
         AlignmentTrackerControlsComponent,
         AlignmentTrackerChartComponent,
         AlignmentTrackerTableComponent,
+        GuideComponent,
         FooterComponent,
     ],
 })
 export class AlignmentTrackerComponent {
+    name = name;
+
     characters: Character[] = characters;
     character: Character | null = null;
     storageKey = 'alignment-tracker';
 
     constructor() {
         const storedCharacters = localStorage.getItem(this.storageKey);
-        if (storedCharacters && storedCharacters.length > 2)
+        if (storedCharacters && storedCharacters.length > 2) {
             this.characters = this.import(JSON.parse(storedCharacters));
+        }
     }
 
     import = (characters: Character[]) =>

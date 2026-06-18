@@ -1,11 +1,7 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-    {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'sound-board',
-    },
+    { path: '', pathMatch: 'full', redirectTo: 'sound-board' },
     {
         path: 'sound-board',
         loadComponent: () =>
@@ -19,9 +15,9 @@ export const routes: Routes = [
             ),
     },
     {
-        path: 'notes',
+        path: 'scenes',
         loadComponent: () =>
-            import('./notes/notes.component').then((m) => m.NotesComponent),
+            import('./scenes/scenes.component').then((m) => m.ScenesComponent),
     },
     {
         path: 'rules',
@@ -31,11 +27,23 @@ export const routes: Routes = [
     {
         path: 'privacy',
         loadComponent: () =>
-            import('./legal/legal.component').then((m) => m.LegalComponent),
+            import('./bulletin/bulletin.component').then(
+                (m) => m.BulletinComponent,
+            ),
     },
     {
         path: 'terms',
         loadComponent: () =>
-            import('./legal/legal.component').then((m) => m.LegalComponent),
+            import('./bulletin/bulletin.component').then(
+                (m) => m.BulletinComponent,
+            ),
     },
+    {
+        path: 'unknown',
+        loadComponent: () =>
+            import('./bulletin/bulletin.component').then(
+                (m) => m.BulletinComponent,
+            ),
+    },
+    { path: '**', redirectTo: 'unknown' },
 ];

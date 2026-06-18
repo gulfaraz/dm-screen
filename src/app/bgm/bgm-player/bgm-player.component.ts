@@ -1,7 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-import { Bgm, BgmPlaybackEvent } from '../bgm.type';
-import { playerUpdateInterval } from '../bgm.config';
 import {
     IonButton,
     IonButtons,
@@ -13,16 +10,18 @@ import {
     IonToolbar,
     RangeCustomEvent,
 } from '@ionic/angular/standalone';
-
 import { addIcons } from 'ionicons';
 import {
-    playBackOutline,
     pause,
     play,
+    playBackOutline,
     playForwardOutline,
     volumeHighOutline,
     volumeLowOutline,
 } from 'ionicons/icons';
+
+import { playerUpdateInterval } from '../bgm.config';
+import { Bgm, BgmPlaybackEvent } from '../bgm.type';
 
 addIcons({
     playBackOutline,
@@ -36,7 +35,7 @@ addIcons({
 @Component({
     selector: 'app-bgm-player',
     templateUrl: './bgm-player.component.html',
-    styleUrls: ['./bgm-player.component.scss'],
+    styleUrl: './bgm-player.component.scss',
     imports: [
         IonToolbar,
         IonLabel,

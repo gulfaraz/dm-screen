@@ -1,10 +1,11 @@
 <ion-toolbar>
     <ion-label slot="start" class="ion-padding bgm-name">
         @if (loading) {
-        <i>Loading...</i>
-        } {{ bgm?.name }}
+            <i>Loading...</i>
+        }
+        {{ bgm?.name }}
         @if (error) {
-        <i>...error!</i>
+            <i>...error!</i>
         }
     </ion-label>
     <ion-buttons class="ion-margin ion-justify-content-center">
@@ -23,17 +24,18 @@
             [disabled]="loading || error"
         >
             @if (!loading) {
-            <ion-icon
-                size="large"
-                slot="icon-only"
-                [name]="isPlaying ? 'pause' : 'play'"
-            />
-            } @if (loading) {
-            <ion-spinner
-                slot="icon-only"
-                name="crescent"
-                class="loading-spinner"
-            />
+                <ion-icon
+                    size="large"
+                    slot="icon-only"
+                    [name]="isPlaying ? 'pause' : 'play'"
+                />
+            }
+            @if (loading) {
+                <ion-spinner
+                    slot="icon-only"
+                    name="crescent"
+                    class="loading-spinner"
+                />
             }
         </ion-button>
         <ion-button

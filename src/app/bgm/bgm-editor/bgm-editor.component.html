@@ -1,84 +1,89 @@
 <ion-grid class="ion-padding-horizontal ion-display-block">
     @for (bgm of bgmSet.items; track bgm; let bgmIndex = $index) {
-    <ion-row>
-        <ion-col size="5">
-            <ion-item>
-                <ion-label
-                    position="stacked"
-                    for="name"
-                    [color]="colours[bgmIndex]"
-                    >Name</ion-label
+        <ion-row>
+            <ion-col size="5">
+                <ion-item>
+                    <ion-label
+                        position="stacked"
+                        for="name"
+                        [color]="colours[bgmIndex]"
+                        >Name</ion-label
+                    >
+                    <ion-input
+                        [color]="colours[bgmIndex]"
+                        class="ion-text-center"
+                        [placeholder]="defaultBgm.name"
+                        [(ngModel)]="bgm.name"
+                        (change)="change()"
+                        name="name"
+                        id="name"
+                        label=""
+                        [debounce]="debounceTime"
+                    />
+                </ion-item>
+            </ion-col>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label
+                        position="stacked"
+                        for="link"
+                        [color]="colours[bgmIndex]"
+                        >Link</ion-label
+                    >
+                    <ion-input
+                        [color]="colours[bgmIndex]"
+                        class="ion-text-center"
+                        [placeholder]="defaultBgm.link"
+                        [(ngModel)]="bgm.link"
+                        (change)="change()"
+                        name="link"
+                        id="link"
+                        type="url"
+                        label=""
+                        [debounce]="debounceTime"
+                    />
+                </ion-item>
+            </ion-col>
+            <ion-col class="ion-text-center">
+                <ion-button
+                    fill="clear"
+                    color="danger"
+                    class="ion-margin"
+                    (click)="removeBgm(bgmIndex)"
+                    title="Delete Sound"
                 >
-                <ion-input
-                    [color]="colours[bgmIndex]"
-                    class="ion-text-center"
-                    [placeholder]="defaultBgm.name"
-                    [(ngModel)]="bgm.name"
-                    (change)="change()"
-                    name="name"
-                    id="name"
-                    label=""
-                    [debounce]="debounceTime"
-                />
-            </ion-item>
-        </ion-col>
-        <ion-col size="6">
-            <ion-item>
-                <ion-label
-                    position="stacked"
-                    for="link"
-                    [color]="colours[bgmIndex]"
-                    >Link</ion-label
+                    <ion-icon
+                        name="close-circle-outline"
+                        slot="icon-only"
+                        size="large"
+                    />
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    }
+    @if (bgmSet.items.length < bgmPerSet) {
+        <ion-row class="ion-padding-vertical">
+            <ion-col>
+                <ion-item button detail="false" lines="none" (click)="addBgm()">
+                    <ion-icon name="add" slot="start" />
+                    <ion-label>Add Sound</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col size="4">
+                <ion-item
+                    button
+                    detail="false"
+                    lines="none"
+                    (click)="deleteBgmSet()"
                 >
-                <ion-input
-                    [color]="colours[bgmIndex]"
-                    class="ion-text-center"
-                    [placeholder]="defaultBgm.link"
-                    [(ngModel)]="bgm.link"
-                    (change)="change()"
-                    name="link"
-                    id="link"
-                    type="url"
-                    label=""
-                    [debounce]="debounceTime"
-                />
-            </ion-item>
-        </ion-col>
-        <ion-col class="ion-text-center">
-            <ion-button
-                fill="clear"
-                color="danger"
-                class="ion-margin"
-                (click)="removeBgm(bgmIndex)"
-                title="Delete Sound"
-            >
-                <ion-icon
-                    name="close-circle-outline"
-                    slot="icon-only"
-                    size="large"
-                />
-            </ion-button>
-        </ion-col>
-    </ion-row>
-    } @if (bgmSet.items.length < bgmPerSet) {
-    <ion-row class="ion-padding-vertical">
-        <ion-col>
-            <ion-item button detail="false" lines="none" (click)="addBgm()">
-                <ion-icon name="add" slot="start" />
-                <ion-label>Add Sound</ion-label>
-            </ion-item>
-        </ion-col>
-        <ion-col size="4">
-            <ion-item
-                button
-                detail="false"
-                lines="none"
-                (click)="deleteBgmSet()"
-            >
-                <ion-icon name="trash-outline" slot="start" color="danger" />
-                <ion-label color="danger">Delete Sound Group</ion-label>
-            </ion-item>
-        </ion-col>
-    </ion-row>
+                    <ion-icon
+                        name="trash-outline"
+                        slot="start"
+                        color="danger"
+                    />
+                    <ion-label color="danger">Delete Sound Group</ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
     }
 </ion-grid>

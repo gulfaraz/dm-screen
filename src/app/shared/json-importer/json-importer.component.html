@@ -1,17 +1,42 @@
-<ion-button
-    [expand]="expand"
-    [fill]="fill"
-    [size]="size"
-    [class]="classes"
-    (click)="click()"
->
-    <ion-icon slot="start" name="push-outline" />
-    <ion-label>{{ label }}</ion-label>
-    <input
-        #fileInput
-        type="file"
-        (change)="import()"
-        accept="application/json"
-        class="ion-hide"
-    />
-</ion-button>
+@if (variant === 'item') {
+    <ion-item
+        color="light"
+        class="ion-padding-vertical ion-text-center"
+        button
+        detail="false"
+        lines="none"
+        (click)="click()"
+    >
+        <ion-icon
+            name="push-outline"
+            slot="start"
+            class="ion-no-margin ion-margin-start"
+        />
+        <ion-label>{{ label }}</ion-label>
+        <input
+            #fileInput
+            type="file"
+            (change)="import()"
+            accept="application/json"
+            class="ion-hide"
+        />
+    </ion-item>
+} @else {
+    <ion-button
+        [expand]="expand"
+        [fill]="fill"
+        [size]="size"
+        [class]="classes"
+        (click)="click()"
+    >
+        <ion-icon slot="start" name="push-outline" />
+        <ion-label>{{ label }}</ion-label>
+        <input
+            #fileInput
+            type="file"
+            (change)="import()"
+            accept="application/json"
+            class="ion-hide"
+        />
+    </ion-button>
+}

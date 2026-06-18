@@ -1,5 +1,5 @@
 <ion-content>
-    <app-bgm-guide />
+    <app-guide [name]="name" />
     <app-bgm-player
         [bgm]="bgm"
         [player]="player"
@@ -20,56 +20,61 @@
                     (error)="playerError()"
                     [playerVars]="{
                         loop: 1,
-                        autoplay: 0,
-                        playlist: getVideoId(bgm?.link)
+                        autoplay: 1,
+                        playlist: getVideoId(bgm?.link),
                     }"
                     disablePlaceholder
                 />
             </ion-col>
         </ion-row>
         <ion-accordion-group
-            #accordionGroup
             [multiple]="true"
+            [value]="openBgmSetIds"
+            (ionChange)="onToggleBgmSet($any($event))"
             [disabled]="loading"
         >
             <ion-reorder-group
                 [disabled]="false"
-                (ionReorderEnd)="handleReorderEnd($any($event))"
+                (ionReorderEnd)="onReorderEnd($any($event))"
             >
-                @for (bgmSet of bgmSets; track bgmSet; let bgmSetIndex = $index)
-                {
-                <ion-accordion [value]="bgmSet.name">
-                    <ion-item slot="header">
-                        <ion-reorder slot="start"></ion-reorder>
-                        <ion-item lines="none" class="ion-margin-vertical">
-                            <ion-input
-                                class="ion-no-padding"
-                                [placeholder]="
-                                    'Sound Group ' + (bgmSetIndex + 1) + ' Name'
-                                "
-                                [(ngModel)]="bgmSet.name"
-                                (click)="$event.stopPropagation()"
-                                (change)="save()"
-                                name="name"
-                                id="name"
-                                label=""
+                @for (
+                    bgmSet of bgmSets;
+                    track bgmSet;
+                    let bgmSetIndex = $index
+                ) {
+                    <ion-accordion [value]="bgmSet.id">
+                        <ion-item slot="header">
+                            <ion-reorder slot="start"></ion-reorder>
+                            <ion-item lines="none" class="ion-margin-vertical">
+                                <ion-input
+                                    class="ion-no-padding"
+                                    [placeholder]="
+                                        'Sound Group ' +
+                                        (bgmSetIndex + 1) +
+                                        ' Name'
+                                    "
+                                    [(ngModel)]="bgmSet.name"
+                                    (click)="$event.stopPropagation()"
+                                    (change)="save()"
+                                    name="name"
+                                    id="name"
+                                    label=""
+                                />
+                            </ion-item>
+                            <app-bgm-buttons
+                                slot="end"
+                                [bgmSet]="bgmSet"
+                                [disabled]="loading"
+                                (togglePlaybackEvent)="togglePlayback($event)"
                             />
                         </ion-item>
-                        <app-bgm-buttons
-                            slot="end"
+                        <app-bgm-editor
+                            slot="content"
                             [bgmSet]="bgmSet"
-                            [disabled]="loading"
-                            (togglePlaybackEvent)="togglePlayback($event)"
+                            (deleteBgmSetEvent)="deleteBgmSet($event)"
+                            (changeEvent)="save()"
                         />
-                    </ion-item>
-                    <app-bgm-editor
-                        slot="content"
-                        [bgmSet]="bgmSet"
-                        [bgmSetIndex]="bgmSetIndex"
-                        (deleteBgmSetEvent)="deleteBgmSet($event)"
-                        (changeEvent)="save()"
-                    />
-                </ion-accordion>
+                    </ion-accordion>
                 }
             </ion-reorder-group>
         </ion-accordion-group>
@@ -88,10 +93,18 @@
                 </ion-item>
             </ion-col>
             <ion-col size="3">
-                <app-bgm-set-importer (importEvent)="import($event)" />
+                <app-json-importer
+                    variant="item"
+                    [label]="importLabel"
+                    (importEvent)="import($event)"
+                />
             </ion-col>
             <ion-col size="3">
-                <app-bgm-set-exporter [storageKey]="storageKey" />
+                <app-json-exporter
+                    variant="item"
+                    [json]="bgmSets"
+                    [label]="exportLabel"
+                />
             </ion-col>
         </ion-row>
     </ion-list>

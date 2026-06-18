@@ -1,0 +1,35 @@
+<ion-row>
+    <ion-col class="ion-text-center ion-no-padding">
+        <ion-button
+            [id]="id"
+            fill="solid"
+            expand="full"
+            color="medium"
+            size="small"
+            class="ion-no-margin"
+        >
+            {{ title }}
+        </ion-button>
+        <ion-modal #guideModal [trigger]="id">
+            <ng-template>
+                <ion-header>
+                    <ion-toolbar>
+                        <ion-title class="ion-text-start ion-padding-start">
+                            {{ title }}
+                        </ion-title>
+                        <ion-buttons slot="end">
+                            <ion-button (click)="guideModal.dismiss()">
+                                Close
+                            </ion-button>
+                        </ion-buttons>
+                    </ion-toolbar>
+                </ion-header>
+                <ion-content class="ion-padding-horizontal">
+                    <markdown
+                        [src]="'assets/markdown/guides' + route() + '.md'"
+                    />
+                </ion-content>
+            </ng-template>
+        </ion-modal>
+    </ion-col>
+</ion-row>

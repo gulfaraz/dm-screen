@@ -1,25 +1,9 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
-
-import bgmSets from './bgm.sets.json';
-import {
-    Bgm,
-    BgmPlaybackEvent,
-    BgmSet,
-    BgmTogglePlaybackEvent,
-} from './bgm.type';
-import { defaultBgm, jumpTime } from './bgm.config';
-import { debounce } from 'lodash';
-import sharedConfig from '../shared/config';
-import { BgmGuideComponent } from './bgm-guide/bgm-guide.component';
-import { BgmPlayerComponent } from './bgm-player/bgm-player.component';
-import { YouTubePlayer } from '@angular/youtube-player';
+import { Component, HostListener, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BgmButtonsComponent } from './bgm-buttons/bgm-buttons.component';
-import { BgmEditorComponent } from './bgm-editor/bgm-editor.component';
-import { BgmSetImporterComponent } from './bgm-set-importer/bgm-set-importer.component';
-import { BgmSetExporterComponent } from './bgm-set-exporter/bgm-set-exporter.component';
-import { FooterComponent } from '../shared/footer/footer.component';
+import { Router } from '@angular/router';
+import { YouTubePlayer } from '@angular/youtube-player';
 import {
+    AccordionGroupCustomEvent,
     IonAccordion,
     IonAccordionGroup,
     IonCol,
@@ -36,13 +20,36 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
+import { debounce } from 'lodash';
+
+import sharedConfig from '../shared/config';
+import { FooterComponent } from '../shared/footer/footer.component';
+import { GuideComponent } from '../shared/guide/guide.component';
+import { JsonExporterComponent } from '../shared/json-exporter/json-exporter.component';
+import { JsonImporterComponent } from '../shared/json-importer/json-importer.component';
+import {
+    defaultBgm,
+    exportLabel,
+    importLabel,
+    jumpTime,
+    name,
+} from './bgm.config';
+import bgmSeed from './bgm.seed.json';
+import {
+    Bgm,
+    BgmPlaybackEvent,
+    BgmSet,
+    BgmTogglePlaybackEvent,
+} from './bgm.type';
+import { BgmButtonsComponent } from './bgm-buttons/bgm-buttons.component';
+import { BgmEditorComponent } from './bgm-editor/bgm-editor.component';
+import { BgmPlayerComponent } from './bgm-player/bgm-player.component';
 
 addIcons({ add });
 
 @Component({
     selector: 'app-bgm',
     templateUrl: './bgm.component.html',
-    styleUrls: ['./bgm.component.scss'],
     imports: [
         IonContent,
         IonList,
@@ -56,24 +63,29 @@ addIcons({ add });
         IonLabel,
         IonReorderGroup,
         IonReorder,
-        BgmGuideComponent,
         BgmPlayerComponent,
         YouTubePlayer,
         FormsModule,
         BgmButtonsComponent,
         BgmEditorComponent,
-        BgmSetImporterComponent,
-        BgmSetExporterComponent,
+        GuideComponent,
+        JsonImporterComponent,
+        JsonExporterComponent,
         FooterComponent,
     ],
 })
 export class BgmComponent {
-    @ViewChild('accordionGroup') accordionGroup!: IonAccordionGroup;
+    private router = inject(Router);
+
+    name = name;
 
     player!: YT.Player;
     bgmSets: BgmSet[] = [];
+    openBgmSets: Record<BgmSet['id'], boolean> = {};
     bgm: Bgm | null = null;
     storageKey = 'bgm-sets';
+    importLabel = importLabel;
+    exportLabel = exportLabel;
     isInitialLoad = true;
     loading = true;
     error = false;
@@ -85,15 +97,17 @@ export class BgmComponent {
             if (storedBgmSets && storedBgmSets.length > 2) {
                 this.import(JSON.parse(storedBgmSets));
             } else {
-                this.import(Array.from(bgmSets));
+                this.import(Array.from(bgmSeed));
             }
         } catch {
-            this.import(Array.from(bgmSets));
+            this.import(Array.from(bgmSeed));
         }
     }
 
     @HostListener('document:keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
+        if (this.router.url !== '/sound-board') return;
+
         if (!(event.target instanceof HTMLInputElement)) {
             if (
                 event.code === 'Space' ||
@@ -117,6 +131,10 @@ export class BgmComponent {
         const regExp =
             /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
         const match = url?.match(regExp);
+
+        // pass control to user on error
+        if (!match && this.loading) this.playerError();
+
         return match && match[7].length == 11 ? match[7] : '';
     };
 
@@ -126,7 +144,9 @@ export class BgmComponent {
         if (this.isInitialLoad) {
             this.isInitialLoad = false;
             this.loading = false;
-            this.playbackEvent(BgmPlaybackEvent.Pause);
+
+            // prevent autoplay on initial load
+            setTimeout(() => this.playbackEvent(BgmPlaybackEvent.Pause), 1000);
         }
     };
 
@@ -152,21 +172,35 @@ export class BgmComponent {
     };
 
     addBgmSet = () => {
+        const id = crypto.randomUUID();
         const name = `Sound Group ${this.bgmSets.length + 1}`;
         this.bgmSets.push({
+            id,
             name,
             items: [{ ...defaultBgm }, { ...defaultBgm }],
         });
-        if (Array.isArray(this.accordionGroup.value)) {
-            this.accordionGroup.value.push(name);
-        } else {
-            this.accordionGroup.value = name;
-        }
+        this.openBgmSets[id] = true;
         this.save();
     };
 
-    deleteBgmSet = (bgmSetIndex: number) => {
-        this.bgmSets.splice(bgmSetIndex, 1);
+    get openBgmSetIds() {
+        return Object.keys(this.openBgmSets);
+    }
+
+    onToggleBgmSet = (event: AccordionGroupCustomEvent<BgmSet['id'][]>) => {
+        if (event.target !== event.currentTarget) {
+            return;
+        }
+
+        const bgmSetIds = event.detail.value ?? [];
+        this.openBgmSets = Object.fromEntries(
+            bgmSetIds.map((bgmSetId) => [bgmSetId, true]),
+        );
+    };
+
+    deleteBgmSet = (bgmSetId: BgmSet['id']) => {
+        this.bgmSets = this.bgmSets.filter(({ id }) => id !== bgmSetId);
+        delete this.openBgmSets[bgmSetId];
         this.save();
     };
 
@@ -215,12 +249,10 @@ export class BgmComponent {
         localStorage.setItem(
             this.storageKey,
             JSON.stringify(
-                this.bgmSets.map((bgmSet) => ({
-                    name: bgmSet.name,
-                    items: bgmSet.items.map((bgm) => ({
-                        name: bgm.name,
-                        link: bgm.link,
-                    })),
+                this.bgmSets.map(({ id, name, items }) => ({
+                    id,
+                    name,
+                    items: items.map(({ name, link }) => ({ name, link })),
                 })),
             ),
         );
@@ -230,15 +262,15 @@ export class BgmComponent {
         this.setBgm(this.bgmSets[0].items[0]);
     };
 
-    handleReorderEnd(event: ReorderEndCustomEvent) {
-        if (event.detail.from === event.detail.to) {
-            return;
-        }
+    onReorderEnd(event: ReorderEndCustomEvent) {
+        const { from, to, complete } = event.detail;
 
-        const movedBgmSet = this.bgmSets.splice(event.detail.from, 1)[0];
-        this.bgmSets.splice(event.detail.to, 0, movedBgmSet);
+        if (from === to) return complete(false);
+
+        const movedBgmSet = this.bgmSets.splice(from, 1)[0];
+        this.bgmSets.splice(to, 0, movedBgmSet);
         this.save();
 
-        event.detail.complete();
+        complete(false);
     }
 }

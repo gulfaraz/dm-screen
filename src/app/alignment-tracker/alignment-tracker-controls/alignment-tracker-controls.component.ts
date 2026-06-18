@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-
-import { Character } from '../alignment-tracker.character';
-import { JsonImporterComponent } from '../../shared/json-importer/json-importer.component';
-import { JsonExporterComponent } from '../../shared/json-exporter/json-exporter.component';
 import { IonHeader, IonToolbar } from '@ionic/angular/standalone';
+
+import { JsonExporterComponent } from '../../shared/json-exporter/json-exporter.component';
+import { JsonImporterComponent } from '../../shared/json-importer/json-importer.component';
+import { Character } from '../alignment-tracker.character';
 
 @Component({
     selector: 'app-alignment-tracker-controls',

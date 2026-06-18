@@ -1,4 +1,5 @@
 export interface BgmSet {
+    id: string;
     name: string;
     items: Bgm[];
 }
