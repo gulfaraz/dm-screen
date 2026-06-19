@@ -29,6 +29,7 @@ import { JsonExporterComponent } from '../shared/json-exporter/json-exporter.com
 import { JsonImporterComponent } from '../shared/json-importer/json-importer.component';
 import {
     defaultBgm,
+    defaultBgmVolume,
     exportLabel,
     importLabel,
     jumpTime,
@@ -85,16 +86,19 @@ export class BgmComponent implements OnInit {
     openBgmSets: Record<BgmSet['id'], boolean> = {};
     bgm: Bgm | null = null;
     storageKey = 'bgm-sets';
+    volumeStorageKey = 'bgm-volume';
     importLabel = importLabel;
     exportLabel = exportLabel;
     isInitialLoad = true;
     loading = true;
     error = false;
     isPlaying = false;
+    volume = defaultBgmVolume;
 
     constructor() {
         try {
             const storedBgmSets = localStorage.getItem(this.storageKey);
+
             if (storedBgmSets && storedBgmSets.length > 2) {
                 this.import(JSON.parse(storedBgmSets));
             } else {
@@ -102,6 +106,16 @@ export class BgmComponent implements OnInit {
             }
         } catch {
             this.import(Array.from(bgmSeed));
+        }
+
+        try {
+            const storedBgmVolume = localStorage.getItem(this.volumeStorageKey);
+
+            if (storedBgmVolume) {
+                this.volume = parseInt(storedBgmVolume);
+            }
+        } catch {
+            this.volume = defaultBgmVolume;
         }
     }
 
@@ -166,6 +180,8 @@ export class BgmComponent implements OnInit {
             // prevent autoplay on initial load
             setTimeout(() => this.playbackEvent(BgmPlaybackEvent.Pause), 1000);
         }
+
+        this.volumeEvent(this.volume);
     };
 
     togglePlayback = (togglePlaybackEvent: BgmTogglePlaybackEvent) => {
@@ -272,8 +288,12 @@ export class BgmComponent implements OnInit {
         );
     };
 
-    volumeEvent = (volume: number) =>
-        volume ? this.player.setVolume(volume) : null;
+    volumeEvent = (volume: number) => {
+        this.volume = volume;
+        localStorage.setItem(this.volumeStorageKey, JSON.stringify(volume));
+
+        this.player?.setVolume(volume);
+    };
 
     save = () =>
         localStorage.setItem(

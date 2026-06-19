@@ -23,6 +23,8 @@ export const defaultBgm = {
     link: 'https://youtu.be/cM6hnp3iB5U',
 };
 
+export const defaultBgmVolume = 80;
+
 export default {
     name,
     bgmPerSet,
