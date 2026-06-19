@@ -1,16 +1,18 @@
 [
   {
+    "id": "019ebe1d-b83c-7f34-bd63-b79b942e310b",
     "name": "General",
     "items": [
       { "link": "https://youtu.be/Jikm8CCRbdM", "name": "Ambient" },
-      { "link": "https://youtu.be/L12t7WpzUxA", "name": "Energy" },
+      { "link": "https://youtu.be/JpSM4cFiHVs", "name": "Energy" },
       { "link": "https://youtu.be/njWvBq-03Wc", "name": "Victory" },
       { "link": "https://youtu.be/6kUZ124kEYg", "name": "Fail" },
-      { "link": "https://youtu.be/xbUPdci2Meg", "name": "Somber" },
+      { "link": "https://youtu.be/5nBQs53MXmQ", "name": "Somber" },
       { "link": "https://youtu.be/2pXa5jzaOBg", "name": "Battle" }
     ]
   },
   {
+    "id": "019ebe1e-19ab-72b6-9d9e-8afdb701aaeb",
     "name": "Puzzle",
     "items": [
       { "link": "https://youtu.be/1G3Phdm2bvw", "name": "Tension" },
@@ -22,6 +24,7 @@
     ]
   },
   {
+    "id": "019ebe1f-6a51-762a-bf72-5ca1bfb274e8",
     "name": "Heroic",
     "items": [
       { "link": "https://youtu.be/UfcAVejslrU", "name": "Ambient" },
@@ -33,6 +36,7 @@
     ]
   },
   {
+    "id": "019ebe1f-58e2-71c2-8ba6-6120b33012c0",
     "name": "Indoors",
     "items": [
       { "link": "https://youtu.be/EULoybB2Nsw", "name": "Busy" },
@@ -44,6 +48,7 @@
     ]
   },
   {
+    "id": "019ebe1f-24a9-761a-8903-a9d2e99049b0",
     "name": "Urban",
     "items": [
       { "link": "https://youtu.be/aTaIFSnReOs", "name": "Clear" },
@@ -55,6 +60,7 @@
     ]
   },
   {
+    "id": "019ebe1f-1138-7529-9450-ae2020d54394",
     "name": "Village",
     "items": [
       { "link": "https://youtu.be/_CA1bTX0Vz0", "name": "Clear" },
@@ -66,6 +72,7 @@
     ]
   },
   {
+    "id": "019ebe1e-edb9-772a-928b-c6bdf1ea90e1",
     "name": "Plains",
     "items": [
       { "link": "https://youtu.be/bLZApMsorjA", "name": "Clear" },
@@ -77,6 +84,7 @@
     ]
   },
   {
+    "id": "019ebe1e-cbcf-74bc-ba7b-f8cc74d6d3d3",
     "name": "Forest",
     "items": [
       { "link": "https://youtu.be/6Em9tLXbhfo", "name": "Clear" },
@@ -88,6 +96,7 @@
     ]
   },
   {
+    "id": "019ebe1e-b043-75e2-be05-d25dabb2bc71",
     "name": "Dungeon",
     "items": [
       { "link": "https://youtu.be/yEYxnJB4jZs", "name": "Ambient" },
@@ -99,6 +108,7 @@
     ]
   },
   {
+    "id": "019ebe1e-8500-7894-a686-57213edc5f35",
     "name": "Faith",
     "items": [
       { "link": "https://youtu.be/B_8xjZ8ML_s", "name": "Ambient" },

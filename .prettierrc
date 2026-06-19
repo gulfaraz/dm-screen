@@ -1,12 +1,16 @@
 {
   "tabWidth": 4,
   "trailingComma": "all",
+  "singleQuote": true,
+  "objectWrap": "collapse",
+  "quoteProps": "as-needed",
   "overrides": [
     {
       "files": ["*.json", "*.yml", ".prettierrc"],
       "options": {
         "tabWidth": 2
       }
-    }
+    },
+    { "files": "*.html", "options": { "parser": "angular" } }
   ]
 }

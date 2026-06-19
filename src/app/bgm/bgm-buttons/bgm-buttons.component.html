@@ -1,25 +1,22 @@
 @for (bgm of bgmSet.items; track bgm; let bgmIndex = $index) {
-<ion-button
-    [fill]="bgm.play ? 'outline' : 'solid'"
-    [color]="colours[bgmIndex]"
-    slot="end"
-    size="default"
-    [disabled]="disabled || !isValidUrl(bgm.link)"
-    (click)="togglePlayback($event, bgm)"
-    class="ion-margin"
->
-    @if (!bgm.loading) {
-    <ion-icon
-        slot="start"
-        [name]="bgm.play ? 'pause-outline' : 'play-outline'"
-    ></ion-icon>
-    } @if (bgm.loading) {
-    <ion-spinner
-        slot="start"
-        name="crescent"
-        class="loading-spinner"
-    ></ion-spinner>
-    }
-    <ion-label>{{ bgm.name }}</ion-label>
-</ion-button>
+    <ion-button
+        [fill]="bgm.play ? 'outline' : 'solid'"
+        [color]="colours[bgmIndex]"
+        slot="end"
+        size="default"
+        [disabled]="disabled || !isValidUrl(bgm.link)"
+        (click)="togglePlayback($event, bgm)"
+        class="ion-margin"
+    >
+        @if (!bgm.loading) {
+            <ion-icon
+                slot="start"
+                [name]="bgm.play ? 'pause-outline' : 'play-outline'"
+            />
+        }
+        @if (bgm.loading) {
+            <ion-spinner slot="start" name="crescent" class="loading-spinner" />
+        }
+        <ion-label>{{ bgm.name }}</ion-label>
+    </ion-button>
 }

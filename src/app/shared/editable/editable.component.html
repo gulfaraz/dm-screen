@@ -1,0 +1,55 @@
+<ion-grid class="ion-display-block">
+    <ion-row>
+        <ion-col size="12">
+            <ion-grid>
+                <ion-row>
+                    <ion-col
+                        size="12"
+                        size-md
+                        class="ion-display-flex ion-flex-column ion-flex-sm-row ion-align-items-start ion-align-items-sm-center gap-3"
+                    >
+                        <ion-segment [(ngModel)]="isEditing" class="w-auto">
+                            <ion-segment-button [value]="false">
+                                <ion-label>Preview</ion-label>
+                            </ion-segment-button>
+                            <ion-segment-button [value]="true">
+                                <ion-label>Edit</ion-label>
+                            </ion-segment-button>
+                        </ion-segment>
+                        <ion-note class="text-sm italic" color="dark">
+                            Updated at {{ editable.updated | date: 'medium' }}
+                        </ion-note>
+                    </ion-col>
+                    <ion-col size="12" size-md="auto" class="ion-text-end">
+                        <ion-button
+                            size="small"
+                            fill="clear"
+                            color="danger"
+                            title="Delete"
+                            (click)="delete.emit(editable)"
+                        >
+                            <ion-icon name="trash-outline" slot="start" />
+                            Delete
+                        </ion-button>
+                        <ion-button
+                            size="small"
+                            fill="solid"
+                            title="Save"
+                            (click)="onSave()"
+                            [disabled]="form.pristine"
+                        >
+                            <ion-icon name="save-sharp" slot="start" />
+                            Save
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-col>
+        <ion-col size="12" [hidden]="isEditing">
+            <ng-container *ngTemplateOutlet="previewTemplate" />
+        </ion-col>
+        <ion-col size="12" [hidden]="!isEditing">
+            <ng-container *ngTemplateOutlet="editTemplate" />
+        </ion-col>
+    </ion-row>
+</ion-grid>

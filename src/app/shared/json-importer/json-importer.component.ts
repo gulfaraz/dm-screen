@@ -6,11 +6,21 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
+import {
+    IonButton,
+    IonIcon,
+    IonItem,
+    IonLabel,
+} from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { pushOutline } from 'ionicons/icons';
+
+addIcons({ pushOutline });
 
 @Component({
     selector: 'app-json-importer',
     templateUrl: './json-importer.component.html',
-    standalone: false,
+    imports: [IonButton, IonIcon, IonItem, IonLabel],
 })
 export class JsonImporterComponent<T> {
     @ViewChild('fileInput') fileInput!: ElementRef;
@@ -19,6 +29,7 @@ export class JsonImporterComponent<T> {
     @Input() fill = 'solid';
     @Input() size = 'small';
     @Input() classes = '';
+    @Input() variant: 'button' | 'item' = 'button';
     @Output() importEvent = new EventEmitter<T>();
 
     click = () => this.fileInput.nativeElement.click();

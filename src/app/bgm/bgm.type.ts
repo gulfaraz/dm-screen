@@ -1,4 +1,5 @@
 export interface BgmSet {
+    id: string;
     name: string;
     items: Bgm[];
 }
@@ -12,7 +13,7 @@ export interface Bgm {
 
 export interface BgmTogglePlaybackEvent {
     event: Event;
-    bgm: Bgm;
+    bgm: Bgm | null;
 }
 
 export enum BgmPlaybackEvent {

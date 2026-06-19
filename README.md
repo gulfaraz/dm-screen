@@ -2,7 +2,8 @@
 
 1. Sound Board
 2. Alignment Tracker
-3. Rules
+3. Notes
+4. Rules
 
 ---
 

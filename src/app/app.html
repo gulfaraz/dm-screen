@@ -4,23 +4,23 @@
         slot="top"
         translucent="true"
     >
-        <ion-tab-button
-            class="dm-screen"
-            href="https://github.com/gulfaraz/dm-screen"
-        >
+        <ion-tab-button class="dm-screen" href="/">
             <ion-label class="ion-text-start">
-                <h1 class="text-weight-700">DM Screen</h1>
-                <ion-text class="text-weight-400">by Gulfaraz Rahman</ion-text>
+                <h1 class="font-bold">DM Screen</h1>
+                <ion-text class="font-normal">by Gulfaraz Rahman</ion-text>
             </ion-label>
         </ion-tab-button>
         <ion-tab-button tab="sound-board">
-            <ion-label>Sound Board</ion-label>
+            <ion-label>{{ name['bgm'] }}</ion-label>
         </ion-tab-button>
         <ion-tab-button tab="alignment-tracker">
-            <ion-label>Alignment Tracker</ion-label>
+            <ion-label>{{ name['alignment-tracker'] }}</ion-label>
         </ion-tab-button>
-        <ion-tab-button tab="rules" [disabled]="true">
-            <ion-label>Rules</ion-label>
+        <ion-tab-button tab="scenes">
+            <ion-label>{{ name['scenes'] }}</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="rules">
+            <ion-label>{{ name['rules'] }}</ion-label>
         </ion-tab-button>
         <ion-tab-button class="payment-link" [href]="paymentLink">
             <ion-label>Pay What You Want</ion-label>

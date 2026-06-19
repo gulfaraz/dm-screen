@@ -1,22 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { AppComponent } from './app.component';
+import { App } from './app';
 
 describe('AppComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [AppComponent],
-            imports: [
-                RouterTestingModule.withRoutes([]),
-                IonicModule.forRoot(),
-            ],
+            imports: [RouterModule, IonicModule.forRoot(), App],
         }).compileComponents();
     });
 
     it('should create the app', () => {
-        const fixture = TestBed.createComponent(AppComponent);
+        const fixture = TestBed.createComponent(App);
         const app = fixture.componentInstance;
         expect(app).toBeTruthy();
     });

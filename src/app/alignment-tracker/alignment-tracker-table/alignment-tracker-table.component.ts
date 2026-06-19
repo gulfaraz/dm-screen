@@ -5,19 +5,47 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-import { InputCustomEvent } from '@ionic/angular';
-import { NgForm } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import {
+    InputCustomEvent,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonInput,
+    IonItem,
+    IonItemOption,
+    IonItemOptions,
+    IonItemSliding,
+    IonList,
+} from '@ionic/angular/standalone';
 
+import sharedConfig from '../../shared/config';
 import {
     Character,
     SetCharacterNameEvent,
 } from '../alignment-tracker.character';
-import sharedConfig from '../../shared/config';
+import { UniqueCharacterNameDirective } from './unique-character-name.directive';
 
 @Component({
     selector: 'app-alignment-tracker-table',
     templateUrl: './alignment-tracker-table.component.html',
-    standalone: false,
+    imports: [
+        IonCard,
+        IonCardHeader,
+        IonCardTitle,
+        IonCardContent,
+        IonList,
+        IonItemSliding,
+        IonItem,
+        IonInput,
+        IonButton,
+        IonItemOptions,
+        IonItemOption,
+        FormsModule,
+        UniqueCharacterNameDirective,
+    ],
 })
 export class AlignmentTrackerTableComponent {
     @Input() characters!: Character[];

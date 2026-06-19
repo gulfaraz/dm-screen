@@ -12,8 +12,8 @@ import {
 import * as d3 from 'd3';
 
 import {
-    Character,
     Alignment,
+    Character,
     SetCharacterAlignmentEvent,
 } from '../alignment-tracker.character';
 import config from './alignment-tracker-chart.config';
@@ -21,7 +21,6 @@ import config from './alignment-tracker-chart.config';
 @Component({
     selector: 'app-alignment-tracker-chart',
     templateUrl: './alignment-tracker-chart.component.html',
-    standalone: false,
 })
 export class AlignmentTrackerChartComponent
     implements AfterViewInit, OnChanges
