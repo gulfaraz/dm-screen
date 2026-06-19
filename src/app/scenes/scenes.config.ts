@@ -4,6 +4,7 @@ import { defaultFuseOptions } from '../shared/config';
 import { Scene } from './scenes.type';
 
 export const name = 'Scenes';
+export const queryParamKey = 'ids';
 
 export const importLabel = `Import ${name} JSON`;
 export const exportLabel = `Export ${name} JSON`;
@@ -20,4 +21,11 @@ export const fuseOptions: IFuseOptions<Scene> = {
     ...defaultFuseOptions,
 };
 
-export default { name, importLabel, exportLabel, defaultScene, fuseOptions };
+export default {
+    name,
+    queryParamKey,
+    importLabel,
+    exportLabel,
+    defaultScene,
+    fuseOptions,
+};

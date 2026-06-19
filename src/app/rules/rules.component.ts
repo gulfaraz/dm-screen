@@ -37,6 +37,7 @@ import {
     fuseOptions,
     importLabel,
     name,
+    queryParamKey,
 } from './rules.config';
 import rulesSeed from './rules.seed.json';
 import { MoveDirection, Rule } from './rules.type';
@@ -84,7 +85,6 @@ export class RulesComponent implements OnInit {
     rules: Rule[] = [];
     rule: Rule | null = null;
     storageKey = 'rules';
-    queryParamKey = 'id';
     importLabel = importLabel;
     exportLabel = exportLabel;
     searchTerm = '';
@@ -112,7 +112,7 @@ export class RulesComponent implements OnInit {
     }
 
     get ruleId() {
-        return this.route.snapshot.queryParamMap.get(this.queryParamKey);
+        return this.route.snapshot.queryParamMap.get(queryParamKey);
     }
 
     addRule = () => {
@@ -165,7 +165,7 @@ export class RulesComponent implements OnInit {
 
     setRoute = (rule: Rule | null) =>
         this.router.navigate([], {
-            queryParams: { [this.queryParamKey]: rule?.id ?? null },
+            queryParams: { [queryParamKey]: rule?.id ?? null },
             replaceUrl: true,
         });
 

@@ -1,6 +1,6 @@
 import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { YouTubePlayer } from '@angular/youtube-player';
 import {
     AccordionGroupCustomEvent,
@@ -27,6 +27,7 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { GuideComponent } from '../shared/guide/guide.component';
 import { JsonExporterComponent } from '../shared/json-exporter/json-exporter.component';
 import { JsonImporterComponent } from '../shared/json-importer/json-importer.component';
+import { routeHook } from '../shared/route-hook';
 import {
     defaultBgm,
     defaultBgmVolume,
@@ -34,6 +35,7 @@ import {
     importLabel,
     jumpTime,
     name,
+    queryParamKey,
 } from './bgm.config';
 import bgmSeed from './bgm.seed.json';
 import {
@@ -77,7 +79,6 @@ addIcons({ add });
 })
 export class BgmComponent implements OnInit {
     private router = inject(Router);
-    private route = inject(ActivatedRoute);
 
     name = name;
 
@@ -89,7 +90,6 @@ export class BgmComponent implements OnInit {
     volumeStorageKey = 'bgm-volume';
     importLabel = importLabel;
     exportLabel = exportLabel;
-    isInitialLoad = true;
     loading = true;
     error = false;
     isPlaying = false;
@@ -111,30 +111,45 @@ export class BgmComponent implements OnInit {
         try {
             const storedBgmVolume = localStorage.getItem(this.volumeStorageKey);
 
-            if (storedBgmVolume) {
-                this.volume = parseInt(storedBgmVolume);
-            }
+            if (storedBgmVolume) this.volume = parseInt(storedBgmVolume);
         } catch {
             this.volume = defaultBgmVolume;
         }
+
+        routeHook('/sound-board', () => this.initRoute());
     }
 
     ngOnInit() {
-        const videoId = this.route.snapshot.queryParamMap.get('v');
-        if (!videoId) return;
+        this.initRoute();
+    }
 
-        const queryBgm = {
-            name: 'Untitled',
-            link: `https://youtu.be/${videoId}`,
-        };
+    initRoute = () => {
+        const videoId = this.router
+            .parseUrl(this.router.url)
+            .queryParamMap.get(queryParamKey);
 
-        const bgm =
-            this.bgmSets
-                .flatMap(({ items }) => items)
-                .find(({ link }) => link.includes(videoId)) ?? queryBgm;
+        let bgm = this.bgmSets[0].items[0];
+
+        if (videoId) {
+            const queryBgm = {
+                name: 'Untitled',
+                link: `https://youtu.be/${videoId}`,
+            };
+
+            bgm =
+                this.bgmSets
+                    .flatMap(({ items }) => items)
+                    .find(({ link }) => link.includes(videoId)) ?? queryBgm;
+        }
 
         this.setBgm(bgm);
-    }
+
+        // prevent autoplay on initial load
+        setTimeout(() => {
+            this.playbackEvent(BgmPlaybackEvent.Pause);
+            this.playerError(false);
+        }, 1000);
+    };
 
     @HostListener('document:keydown', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
@@ -165,22 +180,13 @@ export class BgmComponent implements OnInit {
         const match = url?.match(regExp);
 
         // pass control to user on error
-        if (!match && this.loading) this.playerError();
+        if (!match && this.loading) this.playerError(true);
 
         return match && match[7].length == 11 ? match[7] : '';
     };
 
     playerReady = (event: YT.PlayerEvent) => {
         this.player = event.target;
-
-        if (this.isInitialLoad) {
-            this.isInitialLoad = false;
-            this.loading = false;
-
-            // prevent autoplay on initial load
-            setTimeout(() => this.playbackEvent(BgmPlaybackEvent.Pause), 1000);
-        }
-
         this.volumeEvent(this.volume);
     };
 
@@ -205,7 +211,7 @@ export class BgmComponent implements OnInit {
         this.bgm = bgm;
 
         this.router.navigate([], {
-            queryParams: { v: this.getVideoId(bgm.link) },
+            queryParams: { [queryParamKey]: this.getVideoId(bgm.link) },
             replaceUrl: true,
         });
     };
@@ -262,7 +268,7 @@ export class BgmComponent implements OnInit {
 
         const videoId = this.router
             .parseUrl(this.router.url)
-            .queryParamMap.get('v');
+            .queryParamMap.get(queryParamKey);
 
         this.bgmSets.forEach((bgmSet: BgmSet) =>
             bgmSet.items.forEach((bgm: Bgm) => {
@@ -275,8 +281,8 @@ export class BgmComponent implements OnInit {
         );
     }, sharedConfig.debounceTime);
 
-    playerError = () => {
-        this.error = true;
+    playerError = (error: boolean) => {
+        this.error = error;
         this.isPlaying = false;
         this.loading = false;
 

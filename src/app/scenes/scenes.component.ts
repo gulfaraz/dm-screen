@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
     AccordionGroupCustomEvent,
     AlertController,
@@ -40,12 +40,14 @@ import { FooterComponent } from '../shared/footer/footer.component';
 import { GuideComponent } from '../shared/guide/guide.component';
 import { JsonExporterComponent } from '../shared/json-exporter/json-exporter.component';
 import { JsonImporterComponent } from '../shared/json-importer/json-importer.component';
+import { routeHook } from '../shared/route-hook';
 import {
     defaultScene,
     exportLabel,
     fuseOptions,
     importLabel,
     name,
+    queryParamKey,
 } from './scenes.config';
 import scenesSeed from './scenes.seed.json';
 import { Scene } from './scenes.type';
@@ -85,16 +87,15 @@ addIcons({ add, createOutline, saveOutline, searchOutline, trashOutline });
 export class ScenesComponent implements OnInit {
     private alertController = inject(AlertController);
     private router = inject(Router);
-    private route = inject(ActivatedRoute);
 
     name = name;
 
     scenes: Scene[] = [];
     storageKey = 'scenes';
-    queryParamKey = 'ids';
     searchTerm = '';
     importLabel = importLabel;
     exportLabel = exportLabel;
+    hasInitialized = false;
 
     openScenes: Record<Scene['id'], Scene> = {};
 
@@ -109,9 +110,15 @@ export class ScenesComponent implements OnInit {
         } catch {
             this.import(Array.from(scenesSeed));
         }
+
+        routeHook('/scenes', () => this.initRoute());
     }
 
     ngOnInit() {
+        this.initRoute();
+    }
+
+    initRoute = () => {
         this.openScenes = {};
 
         for (const sceneId of this.sceneIds) {
@@ -123,14 +130,17 @@ export class ScenesComponent implements OnInit {
 
         if (this.openSceneIds.length > 0) return;
 
+        if (this.hasInitialized) return;
+
         this.openScenes[this.scenes[0].id] = { ...this.scenes[0] };
         this.setRoute();
-    }
+        this.hasInitialized = true;
+    };
 
     get sceneIds() {
-        const sceneIdsString = this.route.snapshot.queryParamMap.get(
-            this.queryParamKey,
-        );
+        const sceneIdsString = this.router
+            .parseUrl(this.router.url)
+            .queryParamMap.get(queryParamKey);
         if (!sceneIdsString) return [];
 
         return sceneIdsString
@@ -169,7 +179,7 @@ export class ScenesComponent implements OnInit {
     setRoute = () => {
         const queryParams: Record<string, string> = {};
         if (this.openSceneIds.length > 0) {
-            queryParams[this.queryParamKey] = this.openSceneIds.join(',');
+            queryParams[queryParamKey] = this.openSceneIds.join(',');
         }
 
         this.router.navigate([], { queryParams, replaceUrl: true });

@@ -17,7 +17,7 @@
                     [disableCookies]="true"
                     (stateChange)="debouncePlayerState($event.data)"
                     (ready)="playerReady($event)"
-                    (error)="playerError()"
+                    (error)="playerError(true)"
                     [playerVars]="{
                         loop: 1,
                         autoplay: 1,
