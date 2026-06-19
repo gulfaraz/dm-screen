@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     AccordionGroupCustomEvent,
     AlertController,
@@ -81,13 +82,16 @@ addIcons({ add, createOutline, saveOutline, searchOutline, trashOutline });
         FormsModule,
     ],
 })
-export class ScenesComponent {
+export class ScenesComponent implements OnInit {
     private alertController = inject(AlertController);
+    private router = inject(Router);
+    private route = inject(ActivatedRoute);
 
     name = name;
 
     scenes: Scene[] = [];
     storageKey = 'scenes';
+    queryParamKey = 'ids';
     searchTerm = '';
     importLabel = importLabel;
     exportLabel = exportLabel;
@@ -107,6 +111,34 @@ export class ScenesComponent {
         }
     }
 
+    ngOnInit() {
+        this.openScenes = {};
+
+        for (const sceneId of this.sceneIds) {
+            const scene = this.scenes.find(({ id }) => id === sceneId);
+            if (!scene) continue;
+
+            this.openScenes[scene.id] = { ...scene };
+        }
+
+        if (this.openSceneIds.length > 0) return;
+
+        this.openScenes[this.scenes[0].id] = { ...this.scenes[0] };
+        this.setRoute();
+    }
+
+    get sceneIds() {
+        const sceneIdsString = this.route.snapshot.queryParamMap.get(
+            this.queryParamKey,
+        );
+        if (!sceneIdsString) return [];
+
+        return sceneIdsString
+            .split(',')
+            .map((sceneId) => sceneId.trim())
+            .filter(Boolean);
+    }
+
     addScene = () => {
         const scene = {
             ...defaultScene,
@@ -116,16 +148,32 @@ export class ScenesComponent {
         };
         this.scenes = [scene, ...this.scenes];
         this.openScenes[scene.id] = { ...scene };
+        this.setRoute();
     };
 
-    isDefaultScene = ({ title, description, notes }: Scene) =>
-        title === defaultScene.title &&
-        description === defaultScene.description &&
-        notes === defaultScene.notes;
+    isDefaultScene = (scene: Scene) =>
+        this.isIdenticalScene(defaultScene, scene);
+
+    isIdenticalScene = (
+        { title, description, notes }: Partial<Scene>,
+        scene: Scene,
+    ) =>
+        title === scene.title &&
+        description === scene.description &&
+        notes === scene.notes;
 
     get openSceneIds() {
         return Object.keys(this.openScenes);
     }
+
+    setRoute = () => {
+        const queryParams: Record<string, string> = {};
+        if (this.openSceneIds.length > 0) {
+            queryParams[this.queryParamKey] = this.openSceneIds.join(',');
+        }
+
+        this.router.navigate([], { queryParams, replaceUrl: true });
+    };
 
     get searching() {
         return (
@@ -148,7 +196,7 @@ export class ScenesComponent {
         this.searchTerm = (event.detail.value ?? '').toString();
     };
 
-    onToggleScene = (event: AccordionGroupCustomEvent<Scene['id'][]>) => {
+    onToggleScene = async (event: AccordionGroupCustomEvent<Scene['id'][]>) => {
         if (event.target !== event.currentTarget) {
             return;
         }
@@ -168,15 +216,23 @@ export class ScenesComponent {
                 sceneIndex === -1 ? undefined : this.scenes[sceneIndex];
 
             if (scene) {
-                // discard unsaved changes
-                if (JSON.stringify(scene) !== JSON.stringify(openScene)) {
-                    this.scenes = this.scenes.with(sceneIndex, {
-                        ...openScene,
-                    });
+                // save or discard unsaved changes
+                if (!this.isIdenticalScene(scene, openScene)) {
+                    const { role } = await this.confirmCollapse(scene);
+
+                    if (role === 'save') this.onSave(scene);
+                    else if (role === 'destructive') {
+                        this.scenes = this.scenes.with(sceneIndex, {
+                            ...openScene,
+                        });
+                    } else continue;
                 }
 
                 // delete default scene
-                if (this.isDefaultScene(scene)) {
+                const closedScene = this.scenes.find(
+                    ({ id }) => id === openSceneId,
+                );
+                if (closedScene && this.isDefaultScene(closedScene)) {
                     this.deleteScene(scene);
                 }
             }
@@ -193,6 +249,24 @@ export class ScenesComponent {
 
             this.openScenes[scene.id] = { ...scene };
         }
+
+        this.setRoute();
+    };
+
+    private confirmCollapse = async (scene: Scene) => {
+        const alert = await this.alertController.create({
+            header: 'Save Scene?',
+            message: `You have unsaved changes to the scene: ${scene.title || 'Untitled Scene'}.`,
+            buttons: [
+                { text: 'Discard', role: 'destructive' },
+                { text: 'Cancel', role: 'cancel' },
+                { text: 'Save', role: 'save' },
+            ],
+        });
+
+        await alert.present();
+
+        return alert.onDidDismiss();
     };
 
     isOpen = (sceneId: Scene['id']) => sceneId in this.openScenes;
@@ -235,6 +309,7 @@ export class ScenesComponent {
         delete this.openScenes[scene.id];
 
         this.save();
+        this.setRoute();
     };
 
     save = () =>
@@ -248,10 +323,6 @@ export class ScenesComponent {
     import = (scenes: Scene[]) => {
         this.scenes = scenes;
         this.save();
-
-        if (scenes.length <= 0) return;
-
-        this.openScenes[scenes[0].id] = { ...scenes[0] };
     };
 
     onReorderEnd = (event: ReorderEndCustomEvent) => {

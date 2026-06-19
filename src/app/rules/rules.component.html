@@ -60,7 +60,12 @@
         </ion-col>
     </ion-row>
 
-    <ion-modal #ruleModal [isOpen]="!!rule" (didDismiss)="onDismiss()">
+    <ion-modal
+        #ruleModal
+        [isOpen]="!!rule"
+        [canDismiss]="canDismiss"
+        (didDismiss)="onDismiss()"
+    >
         <ng-template>
             <ion-header>
                 <ion-toolbar>

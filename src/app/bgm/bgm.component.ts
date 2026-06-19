@@ -1,6 +1,6 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { YouTubePlayer } from '@angular/youtube-player';
 import {
     AccordionGroupCustomEvent,
@@ -74,8 +74,9 @@ addIcons({ add });
         FooterComponent,
     ],
 })
-export class BgmComponent {
+export class BgmComponent implements OnInit {
     private router = inject(Router);
+    private route = inject(ActivatedRoute);
 
     name = name;
 
@@ -102,6 +103,23 @@ export class BgmComponent {
         } catch {
             this.import(Array.from(bgmSeed));
         }
+    }
+
+    ngOnInit() {
+        const videoId = this.route.snapshot.queryParamMap.get('v');
+        if (!videoId) return;
+
+        const queryBgm = {
+            name: 'Untitled',
+            link: `https://youtu.be/${videoId}`,
+        };
+
+        const bgm =
+            this.bgmSets
+                .flatMap(({ items }) => items)
+                .find(({ link }) => link.includes(videoId)) ?? queryBgm;
+
+        this.setBgm(bgm);
     }
 
     @HostListener('document:keydown', ['$event'])
@@ -169,6 +187,11 @@ export class BgmComponent {
     setBgm = (bgm: Bgm) => {
         this.loading = true;
         this.bgm = bgm;
+
+        this.router.navigate([], {
+            queryParams: { v: this.getVideoId(bgm.link) },
+            replaceUrl: true,
+        });
     };
 
     addBgmSet = () => {
@@ -221,10 +244,17 @@ export class BgmComponent {
         this.isPlaying = playerState === YT.PlayerState.PLAYING;
         this.loading = false;
 
+        const videoId = this.router
+            .parseUrl(this.router.url)
+            .queryParamMap.get('v');
+
         this.bgmSets.forEach((bgmSet: BgmSet) =>
             bgmSet.items.forEach((bgm: Bgm) => {
+                const isVideoId = !!videoId && bgm.link.includes(videoId);
+                const isBgm = bgm === this.bgm;
+
+                bgm.play = (isBgm || isVideoId) && this.isPlaying;
                 bgm.loading = false;
-                bgm.play = this.bgm === bgm && this.isPlaying;
             }),
         );
     }, sharedConfig.debounceTime);

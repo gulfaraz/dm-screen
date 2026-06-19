@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     AlertController,
     InputCustomEvent,
@@ -73,14 +74,17 @@ addIcons({ add, searchOutline });
         FormsModule,
     ],
 })
-export class RulesComponent {
+export class RulesComponent implements OnInit {
     private alertController = inject(AlertController);
+    private router = inject(Router);
+    private route = inject(ActivatedRoute);
 
     name = name;
 
     rules: Rule[] = [];
     rule: Rule | null = null;
     storageKey = 'rules';
+    queryParamKey = 'id';
     importLabel = importLabel;
     exportLabel = exportLabel;
     searchTerm = '';
@@ -98,6 +102,19 @@ export class RulesComponent {
         }
     }
 
+    ngOnInit() {
+        if (!this.ruleId) return;
+
+        const rule = this.rules.find(({ id }) => id === this.ruleId);
+        if (!rule) return;
+
+        this.onOpen(rule);
+    }
+
+    get ruleId() {
+        return this.route.snapshot.queryParamMap.get(this.queryParamKey);
+    }
+
     addRule = () => {
         const rule: Rule = {
             ...defaultRule,
@@ -109,10 +126,15 @@ export class RulesComponent {
         this.onOpen(rule);
     };
 
-    isDefaultRule = ({ title, summary, details }: Rule) =>
-        title === defaultRule.title &&
-        summary === defaultRule.summary &&
-        details === defaultRule.details;
+    isDefaultRule = (rule: Rule) => this.isIdenticalRule(defaultRule, rule);
+
+    isIdenticalRule = (
+        { title, summary, details }: Partial<Rule>,
+        rule: Rule,
+    ) =>
+        title === rule.title &&
+        summary === rule.summary &&
+        details === rule.details;
 
     get searching() {
         return (
@@ -137,15 +159,25 @@ export class RulesComponent {
 
     onOpen = (rule: Rule) => {
         this.rule = { ...rule };
+
+        this.setRoute(this.rule);
     };
+
+    setRoute = (rule: Rule | null) =>
+        this.router.navigate([], {
+            queryParams: { [this.queryParamKey]: rule?.id ?? null },
+            replaceUrl: true,
+        });
 
     onDismiss = () => {
         const rule = this.rules.find(({ id }) => id === this.rule?.id);
         if (rule && this.isDefaultRule(rule)) {
-            return this.deleteRule(rule);
+            this.deleteRule(rule);
+        } else {
+            this.rule = null;
         }
 
-        this.rule = null;
+        this.setRoute(null);
     };
 
     onSave = (rule: Rule) => {
@@ -153,9 +185,43 @@ export class RulesComponent {
 
         if (ruleIndex < 0) return;
 
-        this.rules = this.rules.with(ruleIndex, rule);
+        this.rules = this.rules.with(ruleIndex, { ...rule });
 
         this.save();
+    };
+
+    canDismiss = async () => {
+        if (!this.rule) return true;
+
+        const rule = this.rules.find(({ id }) => id === this.rule?.id);
+        if (!rule) return true;
+
+        const isPristine = this.isIdenticalRule(rule, this.rule);
+
+        if (isPristine) return true;
+
+        return this.confirmDismiss();
+    };
+
+    private confirmDismiss = async () => {
+        if (!this.rule) return true;
+
+        const alert = await this.alertController.create({
+            header: 'Save Rule?',
+            message: `You have unsaved changes to the rule: ${this.rule.title || 'Untitled Rule'}.`,
+            buttons: [
+                { text: 'Discard', role: 'destructive' },
+                { text: 'Cancel', role: 'cancel' },
+                { text: 'Save', role: 'save' },
+            ],
+        });
+
+        await alert.present();
+
+        const { role } = await alert.onDidDismiss();
+        if (role === 'save') this.onSave(this.rule);
+
+        return role !== 'cancel';
     };
 
     onDelete = async (rule: Rule) => {
