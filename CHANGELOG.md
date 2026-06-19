@@ -1,3 +1,31 @@
+# [0.6.0](https://github.com/gulfaraz/dm-screen/compare/v0.5.5...v0.6.0) (2026-06-19)
+
+
+### Bug Fixes
+
+* add padding to footer ([6c79936](https://github.com/gulfaraz/dm-screen/commit/6c79936a66b07e0c0ba2c0b88b55e16894960910))
+* adjust padding in alignment tracker ([30ce471](https://github.com/gulfaraz/dm-screen/commit/30ce4713a89cd67a449196d4b3e95a373f03df74))
+* copilot comments ([701fbfc](https://github.com/gulfaraz/dm-screen/commit/701fbfcbd78d833318fcb59bec5d92a71a6a6411))
+* disable play on load ([7c68f2f](https://github.com/gulfaraz/dm-screen/commit/7c68f2fb63602e4573dca16808ac48eec4087d14))
+* disable play on load ([4823c32](https://github.com/gulfaraz/dm-screen/commit/4823c326e8db732efb1b0d4a7fb4408af9da7ffb))
+* indicate delete as destructive ([1efa595](https://github.com/gulfaraz/dm-screen/commit/1efa595c172c9d5b30132d97cb9dd0aa5a2dd6de))
+* replace dead links ([3ba9e2f](https://github.com/gulfaraz/dm-screen/commit/3ba9e2f345da2b10b3a1dd80d1807d73f8b167e2))
+* revert import logic ([01f3b28](https://github.com/gulfaraz/dm-screen/commit/01f3b28190fa554ac42fd031dc781ad16573da02))
+* save on add bgm set ([3159b77](https://github.com/gulfaraz/dm-screen/commit/3159b7712a75439a6a1ff9f92a77c50beb53d4b5))
+
+
+### Features
+
+* add notes tab ([4c35041](https://github.com/gulfaraz/dm-screen/commit/4c35041c5a71bd7b652e699b67d5bd166fab2542))
+* confirm before discarding changes ([d513403](https://github.com/gulfaraz/dm-screen/commit/d51340333ff9a4130c593736ec66cf0d507aeef1))
+* disable autoplay and load local ([10d4315](https://github.com/gulfaraz/dm-screen/commit/10d4315351908f44ee0d6b7fdcda17a969659256))
+* persist bgm volume ([e934815](https://github.com/gulfaraz/dm-screen/commit/e934815d046fc41d6941b3e73615213597c8bb62))
+* reorder bgm sets ([a80890e](https://github.com/gulfaraz/dm-screen/commit/a80890ec10448a91f49812683e436a7be0ec409c))
+* scenes and rules ([1d1c8d2](https://github.com/gulfaraz/dm-screen/commit/1d1c8d225b2fd2538fd4b34710c0443ced3e0d4c))
+* use purple as primary colour and fix success green ([a0f196f](https://github.com/gulfaraz/dm-screen/commit/a0f196feabb842daa3d422f1fb5c6922660b9d7d))
+
+
+
 ## [0.5.5](https://github.com/gulfaraz/dm-screen/compare/v0.5.4...v0.5.5) (2025-11-23)
 
 
