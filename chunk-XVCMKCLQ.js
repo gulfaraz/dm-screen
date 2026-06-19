@@ -1,0 +1,1 @@
+import{a as e}from"./chunk-LI565NQW.js";import{a as t}from"./chunk-2R6CW7ES.js";var o="Rules",s="id",p=`Import ${o} JSON`,a=`Export ${o} JSON`,l={title:"New Rule",summary:"",details:""},u=t({keys:["title","summary","details"]},e);export{o as a,s as b,p as c,a as d,l as e,u as f};

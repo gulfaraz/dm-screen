@@ -1,0 +1,1 @@
+import{g as t,k as e,o as r,ta as i,va as n,vb as f}from"./chunk-PGBKZF5L.js";function R(s,m){let p=e(n),c=e(r);p.events.pipe(t(o=>o instanceof i),t(({urlAfterRedirects:o})=>o===s),f(c)).subscribe(m)}export{R as a};

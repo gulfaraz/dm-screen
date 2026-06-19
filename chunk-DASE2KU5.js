@@ -1,0 +1,1 @@
+import{a as t}from"./chunk-LI565NQW.js";import{a as e}from"./chunk-2R6CW7ES.js";var o="Scenes",s="ids",n=`Import ${o} JSON`,p=`Export ${o} JSON`,c={title:"New Scene",date:"",description:"",notes:""},i=e({keys:["title","date","description","notes"]},t);export{o as a,s as b,n as c,p as d,c as e,i as f};
