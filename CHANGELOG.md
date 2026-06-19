@@ -1,3 +1,12 @@
+## [0.6.2](https://github.com/gulfaraz/dm-screen/compare/v0.6.1...v0.6.2) (2026-06-19)
+
+
+### Bug Fixes
+
+* home url ([9549a73](https://github.com/gulfaraz/dm-screen/commit/9549a73e4887b3c140ad41781a122f92322d438e))
+
+
+
 ## [0.6.1](https://github.com/gulfaraz/dm-screen/compare/v0.6.0...v0.6.1) (2026-06-19)
 
 
@@ -99,15 +108,6 @@
 ### Features
 
 * add firebase ([8806271](https://github.com/gulfaraz/dm-screen/commit/8806271d645d8594e6cb2035a688d51e636f5965))
-
-
-
-# [0.3.0](https://github.com/gulfaraz/dm-screen/compare/v0.2.0...v0.3.0) (2023-04-21)
-
-
-### Features
-
-* stripe payment link ([4672c6c](https://github.com/gulfaraz/dm-screen/commit/4672c6cd712a436de7f70a1e57bd08bc83674abb))
 
 
 
