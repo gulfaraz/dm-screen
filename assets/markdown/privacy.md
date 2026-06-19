@@ -23,12 +23,12 @@ I process personal information if I have a valid legal basis. This includes, but
 
 I collect the following,
 
--   Contact Information (name, email address, address)
--   Payment Information (credit card details)
--   Device Information (browser version, screen size)
--   Internet Protocol Information (ip address, internet service provider)
--   Hardware Information (firmware version, operating system version)
--   Information You Provide (messages, documents)
+- Contact Information (name, email address, address)
+- Payment Information (credit card details)
+- Device Information (browser version, screen size)
+- Internet Protocol Information (ip address, internet service provider)
+- Hardware Information (firmware version, operating system version)
+- Information You Provide (messages, documents)
 
 ### Information I Use
 
@@ -47,11 +47,11 @@ I delete the information after the information has served its purpose.
 
 I share the collected information to those who are essential to the Application. This includes, but is not limited to, the following,
 
--   Service Providers
--   Legal Authorities
--   Affiliates and Partners
--   Suppliers and Vendors
--   Entities of Interest
+- Service Providers
+- Legal Authorities
+- Affiliates and Partners
+- Suppliers and Vendors
+- Entities of Interest
 
 I apply appropriate safeguards so that every transfer of information, across or within international legal borders, takes place in accordance with applicable privacy regulations.
 
@@ -67,12 +67,12 @@ I observe reasonable protocols to prevent unauthorized access to, and the misuse
 
 You have the following rights,
 
--   You may request Me to provide access to Your personal information that I have
--   You may request Me to modify and delete Your personal information that I have
--   You may request Me to send a copy of Your personal information that I have to a party that You designate
--   You may request Me to restrict or cease using Your personal information that I have
--   You may withdraw consent that You have provided Me to Your personal information
--   You may file a complaint with a data protection authority regarding My use of Your personal information
+- You may request Me to provide access to Your personal information that I have
+- You may request Me to modify and delete Your personal information that I have
+- You may request Me to send a copy of Your personal information that I have to a party that You designate
+- You may request Me to restrict or cease using Your personal information that I have
+- You may withdraw consent that You have provided Me to Your personal information
+- You may file a complaint with a data protection authority regarding My use of Your personal information
 
 I will process Your request in a manner prescribed by applicable regulations. However, these rights are not absolute; they do not apply in all circumstances and applicable regulations provide for appropriate exceptions. If I do not comply with Your request, I will explain why.
 
