@@ -4,6 +4,7 @@
         <ion-icon name="search-outline" slot="start" />
         <ion-input
             placeholder="Search rules"
+            [(ngModel)]="searchTerm"
             [clearInput]="true"
             (ionInput)="onSearch($any($event))"
             aria-label="Search rules"
@@ -27,6 +28,18 @@
                         (openRule)="onOpen(rule)"
                         (moveRule)="onMove($event, i)"
                     />
+                </ion-col>
+            }
+            @if (visibleRules.length === 0) {
+                <ion-col class="ion-text-center ion-padding ion-margin">
+                    <ion-button
+                        class="italic"
+                        fill="clear"
+                        color="medium"
+                        (click)="searchTerm = ''"
+                    >
+                        No rules with '{{ searchTerm }}'
+                    </ion-button>
                 </ion-col>
             }
         </ion-row>
