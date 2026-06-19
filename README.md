@@ -2,7 +2,7 @@
 
 1. Sound Board
 2. Alignment Tracker
-3. Notes
+3. Scenes
 4. Rules
 
 ---
