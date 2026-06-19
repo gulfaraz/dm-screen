@@ -1,3 +1,16 @@
+## [0.6.1](https://github.com/gulfaraz/dm-screen/compare/v0.6.0...v0.6.1) (2026-06-19)
+
+
+### Bug Fixes
+
+* bulletin spacing ([a988c08](https://github.com/gulfaraz/dm-screen/commit/a988c08bf15fa0775a1e58ad1abcf9c0ad472544))
+* guide markdown path ([2df0977](https://github.com/gulfaraz/dm-screen/commit/2df09776b0d8248c187974ab9a7bdc2632fafec1))
+* rename notes to scenes ([fc4609b](https://github.com/gulfaraz/dm-screen/commit/fc4609bd04ccdad832f63ec173b9851b1a99a4b6))
+* route urls ([6905420](https://github.com/gulfaraz/dm-screen/commit/69054202d74b8052b9a35159e4480102ad7b90a6))
+* show message for no search results ([e8251a2](https://github.com/gulfaraz/dm-screen/commit/e8251a29bef2b0fb724178c9eba6a691a50188ac))
+
+
+
 # [0.6.0](https://github.com/gulfaraz/dm-screen/compare/v0.5.5...v0.6.0) (2026-06-19)
 
 
@@ -95,15 +108,6 @@
 ### Features
 
 * stripe payment link ([4672c6c](https://github.com/gulfaraz/dm-screen/commit/4672c6cd712a436de7f70a1e57bd08bc83674abb))
-
-
-
-# [0.2.0](https://github.com/gulfaraz/dm-screen/compare/7f022f7ee9fbc8a7d5265685639e58bba342b5e8...v0.2.0) (2023-04-21)
-
-
-### Features
-
-* bgm and alignment tracker ([7f022f7](https://github.com/gulfaraz/dm-screen/commit/7f022f7ee9fbc8a7d5265685639e58bba342b5e8))
 
 
 
