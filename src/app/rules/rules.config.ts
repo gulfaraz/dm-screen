@@ -4,6 +4,7 @@ import { defaultFuseOptions } from '../shared/config';
 import { Rule } from './rules.type';
 
 export const name = 'Rules';
+export const queryParamKey = 'id';
 
 export const importLabel = `Import ${name} JSON`;
 export const exportLabel = `Export ${name} JSON`;
@@ -15,4 +16,11 @@ export const fuseOptions: IFuseOptions<Rule> = {
     ...defaultFuseOptions,
 };
 
-export default { name, importLabel, exportLabel, defaultRule, fuseOptions };
+export default {
+    name,
+    queryParamKey,
+    importLabel,
+    exportLabel,
+    defaultRule,
+    fuseOptions,
+};

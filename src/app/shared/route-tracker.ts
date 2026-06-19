@@ -12,7 +12,12 @@ export function injectCurrentRoute(initial = '/') {
                 (event): event is NavigationEnd =>
                     event instanceof NavigationEnd,
             ),
-            map((event) => event.urlAfterRedirects),
+            map(
+                () =>
+                    '/' +
+                    router.routerState.snapshot.root.firstChild?.routeConfig
+                        ?.path,
+            ),
         ),
         { initialValue: initial },
     );

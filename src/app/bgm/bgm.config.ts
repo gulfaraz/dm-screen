@@ -1,4 +1,5 @@
 export const name = 'Sound Board';
+export const queryParamKey = 'v';
 
 export const bgmPerSet = 6;
 
@@ -27,6 +28,7 @@ export const defaultBgmVolume = 80;
 
 export default {
     name,
+    queryParamKey,
     bgmPerSet,
     jumpTime,
     colours,

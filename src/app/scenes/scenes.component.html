@@ -4,6 +4,7 @@
         <ion-icon name="search-outline" slot="start" />
         <ion-input
             placeholder="Search scenes"
+            [(ngModel)]="searchTerm"
             [clearInput]="true"
             (ionInput)="onSearch($any($event))"
             aria-label="Search scenes"
@@ -159,6 +160,19 @@
                 }
             </ion-reorder-group>
         </ion-accordion-group>
+        @if (visibleScenes.length === 0) {
+            <ion-item lines="none" class="ion-padding ion-margin">
+                <ion-button
+                    size="default"
+                    class="italic m-auto"
+                    fill="clear"
+                    color="medium"
+                    (click)="searchTerm = ''"
+                >
+                    No scenes with '{{ searchTerm }}'
+                </ion-button>
+            </ion-item>
+        }
         <ion-row>
             <ion-col>
                 <ion-item
